@@ -1,0 +1,22 @@
+{
+  "name": "qna",
+  "description": "Webapp for Q&A in the classroom",
+  "author": "Team Acetabulum",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strburst/distrowatch-scraper.git"
+  },
+  "scripts": {
+    "start": "gulp watch",
+    "build": "gulp build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.1",
+    "gulp-concat": "^2.6.0"
+  }
+}

@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Use npm/gulp to do the frontend build
+gem 'npm-pipeline-rails', '~> 1.7'
 # Lightweight css boilerplate
 gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
 
