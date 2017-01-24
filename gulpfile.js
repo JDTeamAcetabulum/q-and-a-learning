@@ -21,7 +21,10 @@ gulp.task('lint:js', () => {
 
 gulp.task('build:js', ['lint:js'], () => {
   return gulp.src('app/gulp/js/**/*.js')
-    .pipe($.concat('app.js'))
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.uglify())
+    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('vendor/assets/javascripts/gulp/'));
 });
 
