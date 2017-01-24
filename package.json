@@ -36,6 +36,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "del": "^2.2.2",
     "eslint-config-airbnb-base": "^11.0.1",
     "eslint-plugin-import": "^2.2.0",
     "gulp": "^3.9.1",

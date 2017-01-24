@@ -1,9 +1,15 @@
 /* eslint arrow-body-style: "off" */
 
+const del = require('del');
 const gulp = require('gulp');
 // This will put all "gulp-*" modules into $
 const $ = require('gulp-load-plugins')({
   DEBUG: process.env.DEBUG,
+});
+
+gulp.task('clean', () => {
+  del('vendor/assets/javascripts/gulp/*');
+  del('vendor/assets/stylesheets/gulp/*');
 });
 
 gulp.task('lint:js', () => {
