@@ -19,8 +19,12 @@ gulp.task('build:js', ['lint:js'], () => {
     .pipe(gulp.dest('vendor/assets/javascripts/gulp/'));
 });
 
-gulp.task('build:css', () => {
-  return gulp.src('app/gulp/css/**/*.css')
+gulp.task('build:sass', () => {
+  return gulp.src(['app/gulp/sass/**/*.sass', 'app/gulp/sass/**/*.scss'])
+    .pipe($.sourcemaps.init())
+    .pipe($.sass().on('error', $.sass.logError))
+    .pipe($.autoprefixer())
+    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('vendor/assets/stylesheets/gulp/'));
 });
 
@@ -28,9 +32,9 @@ gulp.task('watch:js', () => {
   gulp.watch('app/gulp/js/**/*.js', ['build:js']);
 });
 
-gulp.task('watch:css', () => {
+gulp.task('watch:sass', () => {
   gulp.watch('app/gulp/css/**/*.css', ['build:css']);
 });
 
-gulp.task('watch', ['watch:js', 'watch:css']);
-gulp.task('build', ['build:js', 'build:css']);
+gulp.task('watch', ['watch:js', 'watch:sass']);
+gulp.task('build', ['build:js', 'build:sass']);
