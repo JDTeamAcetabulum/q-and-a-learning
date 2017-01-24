@@ -16,6 +16,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*.log
+npm-debug.log*
 
 # Ignore Byebug command history file.
 .byebug_history
@@ -24,3 +26,6 @@
 /node_modules/
 /vendor/assets/stylesheets/gulp/
 /vendor/assets/javascripts/gulp/
+
+# Ignore history from node repl.
+.node_repl_history
