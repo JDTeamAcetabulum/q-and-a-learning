@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'login', to: 'login#login'
-
   root 'home#home'
+  get 'login', to: 'login#login'
+  resources :users
 end
