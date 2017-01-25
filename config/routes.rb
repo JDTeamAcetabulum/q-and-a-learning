@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root 'application#hello'
+  get 'login', to: 'login#login'
+
+  root 'home#home'
 end
