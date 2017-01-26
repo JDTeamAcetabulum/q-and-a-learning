@@ -16,6 +16,13 @@
   "browserslist": [
     "> 1%"
   ],
+  "babel": {
+    "presets": [
+      [
+        "env"
+      ]
+    ]
+  },
   "eslintConfig": {
     "extends": "airbnb-base",
     "rules": {
