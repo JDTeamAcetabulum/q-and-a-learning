@@ -14,6 +14,7 @@ gulp.task('clean', () => {
 
 gulp.task('lint:js', () => {
   gulp.src(['app/gulp/js/**/*.js', '!node_modules/**', '!vendor/**'])
+    .pipe($.plumber())
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.eslint.failAfterError());
@@ -21,6 +22,7 @@ gulp.task('lint:js', () => {
 
 gulp.task('build:js', ['lint:js'], () => {
   return gulp.src('app/gulp/js/**/*.js')
+    .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel())
     .pipe($.uglify())
@@ -30,6 +32,7 @@ gulp.task('build:js', ['lint:js'], () => {
 
 gulp.task('build:sass', () => {
   return gulp.src(['app/gulp/sass/**/*.sass', 'app/gulp/sass/**/*.scss'])
+    .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
     .pipe($.autoprefixer())
