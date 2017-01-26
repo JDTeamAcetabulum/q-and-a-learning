@@ -1,2 +1,8 @@
-%h1 Login#login
-%p Find me in app/views/login/login.html.haml
+%form{"accept-charset" => "UTF-8", :action => "/login", :method => "post"}
+  %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+  %input{:name => "authenticity_token", :type => "hidden", :value => "NNb6+J/j46LcrgYUC60wQ2titMuJQ5lLqyAbnbAUkdo="}/
+  %label{:for => "login_email"} Email
+  %input#login_email.form-control{:name => "login[email]", :type => "text"}/
+  %label{:for => "login_password"} Password
+  %input#login_password{:name => "login[password]", :type => "password"}/
+  %input.btn.btn-primary{:name => "commit", :type => "submit", :value => "Log in"}/
