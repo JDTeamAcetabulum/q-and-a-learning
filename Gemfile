@@ -57,3 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'pg', '0.18.4'
 end
+
+# replaces npm uglifier which does not work on heroku
+gem 'uglifier'
