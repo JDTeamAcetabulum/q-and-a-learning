@@ -3,7 +3,7 @@ class LoginController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:login][:email].downcase)
+    user = User.find_by(username: params[:login][:username])
     if user && user.authenticate(params[:login][:password])
       render "home/home"
     else
