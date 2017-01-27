@@ -61,3 +61,6 @@ end
 
 # replaces npm uglifier which does not work on heroku
 gem 'uglifier'
+
+# added for integration test
+gem 'rails-controller-testing'
