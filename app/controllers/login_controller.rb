@@ -7,7 +7,7 @@ class LoginController < ApplicationController
     if user && user.authenticate(params[:login][:password])
       render "home/home"
     else
-      render "login"
+      render "register"
     end
   end
 

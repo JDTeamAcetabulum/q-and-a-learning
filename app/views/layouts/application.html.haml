@@ -1,9 +1,22 @@
 !!! 5
 %html
   %head
-    %title Qna
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= full_title(yield(:title))
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all', |
+      'data-turbolinks-track': 'reload'                   |
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    /[if lt IE 9]
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
   %body
-    = yield
+    %header.navbar.navbar-fixed-top.navbar-inverse
+      .container
+        = link_to "QNA", 'home', id: "logo"
+        %nav
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to "Home",   'home'
+            %li= link_to "Log in", 'login'
+    .container
+      = yield
