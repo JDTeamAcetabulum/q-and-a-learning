@@ -5,9 +5,10 @@ class LoginController < ApplicationController
   def create
     user = User.find_by(username: params[:login][:username])
     if user && user.authenticate(params[:login][:password])
-      render "home/home"
+      redirect_to("home")
     else
-      render "register"
+      flash[:danger] = 'Invalid email/password combination'
+      render "login"
     end
   end
 
