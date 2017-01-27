@@ -8,7 +8,7 @@ class LoginController < ApplicationController
       view_context.log_in user
       redirect_to user
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:error] = 'Invalid email/password combination'
       render "login"
     end
   end
