@@ -1,7 +1,7 @@
 !!! 5
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta(content='text/html' charset='utf-8' http-equiv='Content-Type')
     %title= full_title(yield(:title))
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', |
@@ -16,7 +16,7 @@
         = link_to "QNA", 'home', id: "logo"
         %nav
           %ul.nav.navbar-nav.navbar-right
-            %li= link_to "Home",   'home'
-            %li= link_to "Log in", 'login'
+            %li= link_to "Home",   '/home'
+            %li= link_to "Log in", '/login'
     .container
       = yield

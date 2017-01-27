@@ -2,7 +2,7 @@
 %h1 Log in
 .row
   .col-md-6.col-md-offset-3
-    = form_for(:session, url: login_path) do |f|
+    = form_for(:login, url: login_path) do |f|
       = f.label :username
       = f.text_field :username, class: 'form-control'
       = f.label :password
