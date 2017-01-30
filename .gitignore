@@ -29,3 +29,9 @@ npm-debug.log*
 
 # Ignore history from node repl.
 .node_repl_history
+
+# Ignore autogen js css files
+!/app/assets/javascripts/application.js
+/app/assets/javascripts/*
+!/app/assets/stylesheets/application.css
+/app/assets/stylesheets/*
