@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  root 'login#login'
+  get '/home', to: 'home#home'
+  get '/register', to: 'users#new'
+  post '/register',  to: 'users#create'
+  get '/login', to: 'login#login'
+  post '/login', to: 'login#create'
+  delete '/logout', to: 'login#destroy'
+  resources :users
   resources :questions
-  root 'application#hello'
 end

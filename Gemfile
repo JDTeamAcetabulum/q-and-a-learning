@@ -8,6 +8,8 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'
+# Used for password encryption
+gem 'bcrypt', '~> 3.1.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -56,3 +58,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'pg', '0.18.4'
 end
+
+# replaces npm uglifier which does not work on heroku
+gem 'uglifier'
+
+# added for integration test
+gem 'rails-controller-testing'
