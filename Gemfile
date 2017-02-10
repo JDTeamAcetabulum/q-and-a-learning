@@ -38,6 +38,12 @@ gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-r
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# replaces npm uglifier which does not work on heroku
+gem 'uglifier'
+
+# added for integration test
+gem 'rails-controller-testing'
+
 # ENVIRONMENT-SPECIFIC GEMS
 
 group :development, :test do
@@ -59,8 +65,7 @@ group :production do
   gem 'pg', '0.18.4'
 end
 
-# replaces npm uglifier which does not work on heroku
-gem 'uglifier'
-
-# added for integration test
-gem 'rails-controller-testing'
+group :test do
+  # Plugin to generate output parsable by continuous integration
+  gem 'minitest-ci'
+end

@@ -1,0 +1,16 @@
+dependencies:
+  post:
+    - npm run build
+
+machine:
+  # Ruby version specified in .ruby-version
+  node:
+    version: 7.5.0
+
+test:
+  override:
+    # Generate junit xml reports that can be read by CircleCI
+    - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS/reports":
+        parallel: true
+        files:
+          - test/**/*_test.rb
