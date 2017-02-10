@@ -21,6 +21,9 @@ npm-debug.log*
 /vendor/assets/stylesheets/gulp/
 /vendor/assets/javascripts/gulp/
 
+# Local gem installation location suggested by bundler
+/vendor/bundle/
+
 # History from node repl
 .node_repl_history
 
