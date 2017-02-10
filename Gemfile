@@ -67,5 +67,7 @@ end
 
 group :test do
   # Plugin to generate output parsable by continuous integration
+  gem 'coveralls', require: false
   gem 'minitest-ci'
+  gem 'simplecov', require: false
 end
