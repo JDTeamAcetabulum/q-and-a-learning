@@ -1,0 +1,26 @@
+dependencies:
+  pre:
+    # Replace default bundler version, which is a bit older
+    - yes y | gem uninstall bundler
+    - gem install bundler --pre
+  post:
+    - npm run build
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: cs1332qna
+
+machine:
+  # Ruby version specified in .ruby-version
+  node:
+    version: 7.5.0
+
+test:
+  override:
+    # Generate junit xml reports that can be read by CircleCI
+    - bundle exec rake test TESTOPTS="--ci-dir=$CIRCLE_TEST_REPORTS/reports":
+        parallel: true
+        files:
+          - test/**/*_test.rb
