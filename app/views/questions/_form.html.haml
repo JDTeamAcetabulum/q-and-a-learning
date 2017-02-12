@@ -21,12 +21,11 @@
       = g.hidden_field :correct, value: true
 
 
-  = 3.times do
-    = f.fields_for :answers do |g|
-      .field
-        = g.label 'Incorrect Answer'
-        = g.text_field :content
-        = g.hidden_field :correct, value: false
+  = f.fields_for :answers do |g|
+    .field
+      = g.label 'Incorrect Answer'
+      = g.text_field :content
+      = g.hidden_field :correct, value: false
 
   .actions
     = f.submit 'Save'

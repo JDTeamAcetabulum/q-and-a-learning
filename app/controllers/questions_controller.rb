@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
     @question.build_correct_answer
+    3.times {@question.answers.build}
   end
 
   # GET /questions/1/edit
@@ -72,13 +73,12 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:user_id,
+                                       :content,
                                        correct_answer_attributes: [:correct, :content],
-                                       answers_attribues: [:correct, :content])
+                                       answers_attributes: [:correct, :content])
     end
 
     def build
       @question = Question.new(question_params)
-      @question.build_correct_answer
-      @question.correct_answer_atributes(params[:question][:correct_answer_attributes])
     end
 end
