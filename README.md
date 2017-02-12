@@ -1,4 +1,4 @@
-# README
+# qna [![CircleCI](https://circleci.com/gh/JDTeamAcetabulum/qna.svg?style=shield)](https://circleci.com/gh/JDTeamAcetabulum/qna) [![Coverage Status](https://coveralls.io/repos/github/JDTeamAcetabulum/qna/badge.svg)](https://coveralls.io/github/JDTeamAcetabulum/qna)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

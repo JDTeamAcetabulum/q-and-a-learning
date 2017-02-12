@@ -10,8 +10,9 @@
     "url": "https://github.com/strburst/distrowatch-scraper.git"
   },
   "scripts": {
-    "start": "gulp watch",
-    "build": "gulp build"
+    "build": "gulp build",
+    "gulp": "gulp",
+    "start": "gulp watch"
   },
   "browserslist": [
     "> 1%"
