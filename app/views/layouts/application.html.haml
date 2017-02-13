@@ -17,6 +17,22 @@
         %nav
           %ul.nav.navbar-nav.navbar-right
             %li= link_to "Home",   '/home'
-            %li= link_to "Log in", '/login'
+            - if logged_in?
+              %li= link_to "Users", '#'
+              #li.dropdown
+                #a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Account
+                #b.caret
+              #ul.dropdown-menu
+                #li= link_to "Profile", current_user
+                #li= link_to "Settings", '#'
+                #li.divider
+                #li
+                  = link_to "Log out", logout_path, method: "delete"
+            - else
+              #li= link_to "Log in", login_path
     .container
-      = yield
+      - if logged_in? || controller_name == 'login' || controller_name == 'users'
+        = yield
+      - else
+        = controller.redirect_to action: 'login', controller: 'login'
