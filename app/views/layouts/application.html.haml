@@ -32,7 +32,7 @@
             - else
               #li= link_to "Log in", login_path
     .container
-      - if logged_in? || current_page?(action: 'login', controller: 'login')
+      - if logged_in? || controller_name == 'login' || controller_name == 'users'
         = yield
       - else
         = controller.redirect_to action: 'login', controller: 'login'
