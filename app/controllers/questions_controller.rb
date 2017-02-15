@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  before_action :build, only: [:create]
 
   # GET /questions
   # GET /questions.json
@@ -76,9 +75,5 @@ class QuestionsController < ApplicationController
                                        :content,
                                        correct_answer_attributes: [:correct, :content],
                                        answers_attributes: [:correct, :content])
-    end
-
-    def build
-      @question = Question.new(question_params)
     end
 end
