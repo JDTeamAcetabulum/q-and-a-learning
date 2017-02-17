@@ -2,36 +2,50 @@
 %html
   %head
     %meta(content='text/html' charset='utf-8' http-equiv='Content-Type')
+    %meta(name='viewport' content='width=device-width')
     %title= full_title(yield(:title))
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', |
       'data-turbolinks-track': 'reload'                   |
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %link(rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     /[if lt IE 9]
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      <script src='//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js'>
       </script>
   %body
-    %header.navbar.navbar-fixed-top.navbar-inverse
-      .container
-        = link_to "QNA", 'home', id: "logo"
-        %nav
-          %ul.nav.navbar-nav.navbar-right
-            %li= link_to "Home",   '/home'
-            - if logged_in? && is_instructor?
-              %li= link_to "Users", '#'
-              #li.dropdown
-                #a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                Account
-                #b.caret
-              #ul.dropdown-menu
-                #li= link_to "Profile", current_user
-                #li= link_to "Settings", '#'
-                #li.divider
-                #li
-                  = link_to "Log out", logout_path, method: "delete"
-            - else
-              #li= link_to "Log in", login_path
-    .container
+    - if logged_in?
+      -# Page navigation is visible after logging in, not on login screen, etc.
+      #top-bar
+        #logo.logo
+          CS 1332 A
+        .logged-in-as
+          Logged in -
+          = link_to(logout_path, method: "delete") do
+            %i.fa.fa-sign-out
+            logout
+      %nav#menu
+        %ul
+          %li
+            = link_to('/home') do
+              %i.fa.fa-home
+              Home
+          %li
+            = link_to('/questions') do
+              %i.fa.fa-question-circle
+              Questions
+          %li
+            %a{:href => '#'}
+              %i.fa.fa-bar-chart-o
+              Statistics
+          %li
+            %a{:href => '#'}
+              %i.fa.fa-th-list
+              Roster
+          %li
+            %a{:href => '#'}
+              %i.fa.fa-cog
+              Settings
+    #content.container
       - if logged_in? || controller_name == 'login' || controller_name == 'users'
         = yield
       - else

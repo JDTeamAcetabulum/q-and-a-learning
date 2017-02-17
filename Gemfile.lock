@@ -46,7 +46,6 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     bcrypt (3.1.11)
-    bcrypt (3.1.11-x86-mingw32)
     builder (3.2.3)
     byebug (9.0.6)
     concurrent-ruby (1.0.4)
@@ -201,6 +200,9 @@ DEPENDENCIES
   tzinfo-data
   uglifier
   web-console (>= 3.3.0)
+
+RUBY VERSION
+   ruby 2.4.0p0
 
 BUNDLED WITH
    1.14.3
