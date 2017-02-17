@@ -14,22 +14,23 @@
       </script>
   %body
     - if logged_in?
+      -# Page navigation is visible after logging in, not on login screen, etc.
       #top-bar
         #logo.logo
           CS 1332 A
         .logged-in-as
           Logged in as User -
-          %a{:href => logout_path}
+          = link_to(logout_path, method: "delete") do
             %i.fa.fa-sign-out
             logout
       %nav#menu
         %ul
           %li
-            %a{:href => url_for(:controller => '/home', :action => 'home')}
+            = link_to('/home') do
               %i.fa.fa-home
               Home
           %li
-            %a{:href => url_for(controller: '/questions')}
+            = link_to('/questions') do
               %i.fa.fa-question-circle
               Questions
           %li
