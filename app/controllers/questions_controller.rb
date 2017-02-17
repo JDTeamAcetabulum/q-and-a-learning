@@ -23,6 +23,11 @@ class QuestionsController < ApplicationController
   def edit
   end
 
+  def short
+    @question = Question.new
+    @question.build_correct_answer
+  end 
+
   # POST /questions
   # POST /questions.json
   def create
