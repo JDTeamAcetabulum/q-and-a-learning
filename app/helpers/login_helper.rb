@@ -20,4 +20,9 @@ module LoginHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def is_instructor?
+    current_user[:role] == "instructor"
+  end
+
 end
