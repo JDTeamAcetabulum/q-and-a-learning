@@ -45,7 +45,7 @@ gulp.task('watch:js', () => {
 });
 
 gulp.task('watch:sass', () => {
-  gulp.watch('app/gulp/css/**/*.css', ['build:css']);
+  gulp.watch(['app/gulp/sass/**/*.sass', 'app/gulp/sass/**/*.scss'], ['build:sass']);
 });
 
 gulp.task('build', ['build:js', 'build:sass']);

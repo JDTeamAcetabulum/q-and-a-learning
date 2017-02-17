@@ -1,0 +1,54 @@
+// Styles related to showing user errors
+
+@import 'common';
+
+$error-width: 45rem;
+
+pre {
+  background-color: #eee;
+  padding: $small;
+}
+
+div.field,
+div.actions {
+  margin-bottom: 1rem;
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: $tiny;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: $error-width;
+  border: $tiny solid red;
+  padding: $smallmed;
+  padding-bottom: 0;
+  margin-bottom: $large;
+  background-color: #f0f0f0;
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: $small $small $small $medium;
+    margin: -$smallmed;
+    margin-bottom: 0;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  ul {
+    padding-left: $large;
+    padding-right: $large;
+    list-style: square;
+  }
+}
+
+label {
+  display: block;
+}
