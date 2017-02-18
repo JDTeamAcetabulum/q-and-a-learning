@@ -22,7 +22,26 @@ module LoginHelper
   end
 
   def is_instructor?
-    current_user[:role] == "instructor"
+    if current_user
+      @current_user[:role] == "instructor"
+    end
+  end
+
+  def check_privilege(controller, action)
+    if logged_in?
+      if @current_user[:role] != "instructor"
+        restricted = {"users" => ["index"], "questions" => ["new", "edit", "short"]}
+        if restricted[controller] && restricted[controller].include?(action)
+          false
+        else
+          true
+        end
+      else
+        true
+      end
+    elsif controller == 'login' || (controller == 'users' && action == 'new')
+      true
+    end
   end
 
 end

@@ -1,0 +1,7 @@
+- provide(:title, "Roster")
+%h1
+  = "Roster"
+- @users.each do |u|
+  %p
+    = gravatar_for u
+    = u.username
