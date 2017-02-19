@@ -50,4 +50,4 @@
       - if check_privilege(controller_name, action_name)
         = yield
       - else
-        = controller.redirect_to action: 'home', controller: 'home'
+        = controller.redirect_to action: 'login', controller: 'login'
