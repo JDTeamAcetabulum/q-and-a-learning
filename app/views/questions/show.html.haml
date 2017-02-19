@@ -1,8 +1,16 @@
 %p#notice= notice
 
 %p
-  %b User:
-  = @question.user_id
+  %b Created by:
+  = get_user(@question.user_id).username
+  %h2 Question:
+  %p
+    = @question.content
+  %h2 Answers:
+  - @question.answers.each.with_index do |a,i|
+    = label_tag a.content
+    = radio_button :answer, "value", id: i
+
 
 = link_to 'Edit', edit_question_path(@question)
 \|
