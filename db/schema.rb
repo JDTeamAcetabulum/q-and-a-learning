@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170215175238) do
+ActiveRecord::Schema.define(version: 20170223012336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,41 @@ ActiveRecord::Schema.define(version: 20170215175238) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "lectures", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lecturetaggings", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "lecture_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["lecture_id"], name: "index_lecturetaggings_on_lecture_id", using: :btree
+    t.index ["question_id"], name: "index_lecturetaggings_on_question_id", using: :btree
+  end
+
   create_table "questions", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "content"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "topictaggings", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "topic_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["question_id"], name: "index_topictaggings_on_question_id", using: :btree
+    t.index ["topic_id"], name: "index_topictaggings_on_topic_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +71,8 @@ ActiveRecord::Schema.define(version: 20170215175238) do
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
+  add_foreign_key "lecturetaggings", "lectures"
+  add_foreign_key "lecturetaggings", "questions"
+  add_foreign_key "topictaggings", "questions"
+  add_foreign_key "topictaggings", "topics"
 end
