@@ -13,6 +13,14 @@
     = f.label 'Question'
     = f.text_field :content
 
+  .field
+    = f.label 'Topics (Seperate Using Commas)'
+    = f.text_field :all_topics
+
+  .field
+    = f.label 'Lecture Number'
+    = f.text_field :all_lectures
+
   = f.fields_for :correct_answer do |g|
     .field
       = g.label 'Correct Answer'
