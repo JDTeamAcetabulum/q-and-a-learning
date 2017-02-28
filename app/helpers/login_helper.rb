@@ -31,16 +31,12 @@ module LoginHelper
     if logged_in?
       if @current_user[:role] != "instructor"
         restricted = {"users" => ["index"], "questions" => ["new", "edit", "short"]}
-        if restricted[controller] && restricted[controller].include?(action)
-          false
-        else
-          true
-        end
+        not restricted[controller] && restricted[controller].include?(action)
       else
         true
       end
-    elsif controller == 'login' || (controller == 'users' && action == 'new')
-      true
+    else
+      controller == 'login' || (controller == 'users' && action == 'new')
     end
   end
 

@@ -13,13 +13,17 @@
       <script src='//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js'>
       </script>
   %body
-    - if logged_in?
-      -# Page navigation is visible after logging in, not on login screen, etc.
+    - if logged_in? # Page navigation is visible after logging in, not on login screen, etc.
       #top-bar
         #logo.logo
           CS 1332 A
         .logged-in-as
-          Logged in -
+          Logged in as
+          = link_to(@current_user) do
+            = @current_user.username
+            - if @current_user.role == 'instructor'
+              (instructor)
+          \-
           = link_to(logout_path, method: "delete") do
             %i.fa.fa-sign-out
             logout
@@ -39,7 +43,7 @@
               Statistics
           - if is_instructor?
             %li
-              %a{:href => '#'}
+              = link_to('/users') do
                 %i.fa.fa-th-list
                 Roster
           %li
