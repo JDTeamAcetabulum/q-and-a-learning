@@ -1,0 +1,9 @@
+# A lot of commits were made without the authors setting their emails properly
+# To fix `git shortlog`, etc. without editing the history, we use this file
+
+Bikranta Dhamala <dhamalabikranta@gmail.com> <bik@Biks-MacBook-Pro.local>
+Bikranta Dhamala <dhamalabikranta@gmail.com> <bik@lawn-143-215-113-92.lawn.gatech.edu>
+Forester Vosburgh <fvosburgh3@gmail.com> <forester@Foresters-Air.1045>
+Forester Vosburgh <fvosburgh3@gmail.com> <forester@lawn-128-61-2-110.lawn.gatech.edu>
+Matthew Keezer <rmkeezer@yahoo.com>
+Matthew Keezer <rmkeezer@yahoo.com> <Matthew Keezer>
