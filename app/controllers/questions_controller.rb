@@ -86,7 +86,6 @@ class QuestionsController < ApplicationController
 
     def update_answers
       question_params[:answers_attributes].each do |key, val|
-        debugger
         Answer.find_by_id(val['id']).update_attribute(:content, val['content'])
       end
     end
