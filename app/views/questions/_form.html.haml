@@ -34,6 +34,7 @@
           = g.label 'Incorrect Answer'
           = g.text_field :content
           = g.hidden_field :correct, value: false
+          = g.hidden_field :id, value: a.id
 
   .actions
     = f.submit 'Save'
