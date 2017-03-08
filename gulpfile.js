@@ -13,9 +13,10 @@ gulp.task('clean', () => {
 });
 
 gulp.task('lint:js', () => {
-  gulp.src(['app/gulp/js/**/*.js', '!node_modules/**', '!vendor/**'])
+  return gulp.src(['app/gulp/js/**/*.js', '!node_modules/**', '!vendor/**'])
     .pipe($.plumber())
-    .pipe($.eslint())
+    .pipe($.eslint({ fix: true }))
+    .pipe($.eslintIfFixed('app/gulp/js/'))
     .pipe($.eslint.format())
     .pipe($.eslint.failAfterError());
 });
