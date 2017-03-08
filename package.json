@@ -27,7 +27,8 @@
   "eslintConfig": {
     "extends": "airbnb-base",
     "env": {
-      "browser": true
+      "browser": true,
+      "jquery": true
     },
     "rules": {
       "no-param-reassign": [
@@ -57,6 +58,7 @@
     "gulp-cli": "^1.2.1",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^3.0.1",
+    "gulp-eslint-if-fixed": "^1.0.0",
     "gulp-load-plugins": "^1.4.0",
     "gulp-plumber": "^1.1.0",
     "gulp-sass": "^3.1.0",
