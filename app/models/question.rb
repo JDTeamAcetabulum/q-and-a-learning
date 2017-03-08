@@ -12,23 +12,23 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :answers, :correct_answer
   validates :correct_answer, presence: true
 
-	def all_topics=(names)
-	  self.topics = names.split(",").map do |name|
-	      Topic.where(name: name.strip).first_or_create!
-	  end
-	end
+  def all_topics=(names)
+    self.topics = names.split(",").map do |name|
+        Topic.where(name: name.strip).first_or_create!
+    end
+  end
 
-	def all_topics
-	  self.topics.map(&:name).join(", ")
-	end
+  def all_topics
+    self.topics.map(&:name).join(", ")
+  end
 
-	def all_lectures=(names)
-	  self.lectures = names.split(",").map do |name|
-	      Lecture.where(name: name.strip).first_or_create!
-	  end
-	end
+  def all_lectures=(names)
+    self.lectures = names.split(",").map do |name|
+        Lecture.where(name: name.strip).first_or_create!
+    end
+  end
 
-	def all_lectures
-	  self.lectures.map(&:name).join(", ")
-	end
+  def all_lectures
+    self.lectures.map(&:name).join(", ")
+  end
 end

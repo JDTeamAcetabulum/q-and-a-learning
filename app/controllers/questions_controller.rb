@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   def short
     @question = Question.new
     @question.build_correct_answer
-  end 
+  end
 
   # POST /questions
   # POST /questions.json
@@ -66,6 +66,10 @@ class QuestionsController < ApplicationController
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # This method is used when a student answers a question and submits the form.
+  def submit_question
   end
 
   private
