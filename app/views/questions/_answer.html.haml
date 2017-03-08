@@ -1,0 +1,4 @@
+.field
+  = f.label 'Incorrect Answer'
+  = f.text_field :content, multiple: true
+  %button#remove-answer{:onclick => "removeAnswer($(this))"} -

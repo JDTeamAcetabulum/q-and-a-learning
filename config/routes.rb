@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'login#destroy'
 
   get'questions/short', as: :short_question
-  
+
   resources :users
   resources :questions
 end
