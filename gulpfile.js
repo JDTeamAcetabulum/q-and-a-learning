@@ -33,7 +33,7 @@ gulp.task('build:js', ['lint:js'], () => {
 });
 
 gulp.task('build:sass', () => {
-  return gulp.src(['app/gulp/sass/**/*.sass', 'app/gulp/sass/**/*.scss'])
+  return gulp.src(['app/gulp/sass/**/[^_]*.sass', 'app/gulp/sass/**/[^_]*.scss'])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass().on('error', $.sass.logError))
