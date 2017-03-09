@@ -7,13 +7,18 @@ const $ = require('gulp-load-plugins')({
   DEBUG: process.env.DEBUG,
 });
 
-gulp.task('clean', () => {
+gulp.task('clean:js', () => {
   del('vendor/assets/javascripts/gulp/*');
+});
+
+gulp.task('clean:sass', () => {
   del('vendor/assets/stylesheets/gulp/*');
 });
 
+gulp.task('clean', ['clean:js', 'clean:sass']);
+
 gulp.task('lint:js', () => {
-  return gulp.src(['app/gulp/js/**/*.js', '!node_modules/**', '!vendor/**'])
+  return gulp.src(['app/gulp/js/**/*.js'])
     .pipe($.plumber())
     .pipe($.eslint({ fix: true }))
     .pipe($.eslintIfFixed('app/gulp/js/'))
@@ -21,7 +26,7 @@ gulp.task('lint:js', () => {
     .pipe($.eslint.failAfterError());
 });
 
-gulp.task('build:js', ['lint:js'], () => {
+gulp.task('build:js', ['clean:js', 'lint:js'], () => {
   return gulp.src('app/gulp/js/**/*.js')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -32,7 +37,7 @@ gulp.task('build:js', ['lint:js'], () => {
     .pipe(gulp.dest('vendor/assets/javascripts/gulp/'));
 });
 
-gulp.task('build:sass', () => {
+gulp.task('build:sass', ['clean:sass'], () => {
   return gulp.src(['app/gulp/sass/**/[^_]*.sass', 'app/gulp/sass/**/[^_]*.scss'])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
@@ -52,3 +57,5 @@ gulp.task('watch:sass', () => {
 
 gulp.task('build', ['build:js', 'build:sass']);
 gulp.task('watch', ['build', 'watch:js', 'watch:sass']);
+
+gulp.task('default', ['build']);
