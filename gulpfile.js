@@ -26,6 +26,7 @@ gulp.task('build:js', ['lint:js'], () => {
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.babel())
+    .pipe($.concat('app.js'))
     .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('vendor/assets/javascripts/gulp/'));
