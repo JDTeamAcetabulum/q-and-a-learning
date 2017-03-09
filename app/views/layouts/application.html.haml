@@ -25,30 +25,30 @@
               (instructor)
           \-
           = link_to(logout_path, method: "delete") do
-            %i.fa.fa-sign-out
+            %i.fa.fa-sign-out(aria-hidden='true')
             logout
       %nav#menu
         %ul
           %li
             = link_to('/home') do
-              %i.fa.fa-home
+              %i.fa.fa-home.fa-fw(aria-hidden='true')
               Home
           %li
             = link_to('/questions') do
-              %i.fa.fa-question-circle
+              %i.fa.fa-question-circle.fa-fw(aria-hidden='true')
               Questions
           %li
             %a{:href => '#'}
-              %i.fa.fa-bar-chart-o
+              %i.fa.fa-bar-chart-o.fa-fw(aria-hidden='true')
               Statistics
           - if is_instructor?
             %li
               = link_to('/users') do
-                %i.fa.fa-th-list
+                %i.fa.fa-th-list.fa-fw(aria-hidden='true')
                 Roster
           %li
             %a{:href => '#'}
-              %i.fa.fa-cog
+              %i.fa.fa-cog.fa-fw(aria-hidden='true')
               Settings
     #content.container
       - if check_privilege(controller_name, action_name)
