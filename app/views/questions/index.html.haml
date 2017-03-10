@@ -5,21 +5,23 @@
     %tr
       %th Creator
       %th Lectures
-      %th Actions
       %th Topics
+      %th Content
+      %th Actions
 
   %tbody
     - @questions.each do |question|
       %tr
         %td= get_user(question.user_id).username
         %td= question.all_lectures
+        %td= question.all_topics
+        %td= question.content
         %td
           = link_to 'Show', question
           \-
           = link_to 'Edit', edit_question_path(question)
           \-
           = link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }
-        %td= question.all_topics
 
 %br
 
