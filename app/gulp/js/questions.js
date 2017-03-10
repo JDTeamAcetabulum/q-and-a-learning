@@ -10,3 +10,8 @@ $('body.questions.edit').ready(() => {
     $(e.target).parent().remove();
   });
 });
+
+// Code to initialize datatables in question list
+$('body.questions.index').ready(() => {
+  $('#question-table').DataTable();
+});
