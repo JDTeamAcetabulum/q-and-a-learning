@@ -21,8 +21,8 @@ gem "haml-rails", '~> 0.9'
 # We should remove this if we set up vue for the frontend
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-# If we are creating a single page app with vue-router, we should remove this
 gem 'turbolinks', '~> 5'
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'npm-pipeline-rails', '~> 1.7'
 # Lightweight css boilerplate
 gem 'skeleton-rails', :git => 'https://github.com/helios-technologies/skeleton-rails'
+# Fancy tables
+gem 'jquery-datatables-rails', '~> 3.4.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
