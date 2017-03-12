@@ -14,5 +14,6 @@
  *= require_self
  *= require normalize
  *= require skeleton
+ *= require dataTables/jquery.dataTables
  *= require gulp/app
  */
