@@ -27,14 +27,14 @@
       = g.text_field :content
       = g.hidden_field :correct, value: true
 
-  - @question.answers.each do |a|
-    = f.fields_for :answers, a do |g|
-      - if !a.correct
-        .field
-          = g.label 'Incorrect Answer'
-          = g.text_field :content
-          = g.hidden_field :correct, value: false
-          = g.hidden_field :id, value: a.id
+  #wrong-answers
+    - @question.answers.each do |a|
+      = f.fields_for :answers, a do |g|
+        = render 'answer', f: g, ans: a
+        #new-answer{:style => "display: none;"}
+          = render 'answer', f: g, ans: a
+
+  %button#add-answer +
 
   .actions
     = f.submit 'Save'

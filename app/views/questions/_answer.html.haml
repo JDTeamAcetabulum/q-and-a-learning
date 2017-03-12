@@ -1,0 +1,6 @@
+.field
+  = f.label 'Incorrect Answer'
+  = f.text_field :content, multiple: true
+  = f.hidden_field :correct, value: false
+  = f.hidden_field :id, value: ans.id
+  %button.remove-answer -

@@ -8,8 +8,9 @@
     = @question.content
   %h2 Answers:
   - @question.answers.each.with_index do |a,i|
-    = label_tag a.content
-    = radio_button :answer, "value", id: i
+    - if a.content != nil
+      = label_tag a.content
+      = radio_button :answer, "value", id: i
 
 
 = link_to 'Edit', edit_question_path(@question)

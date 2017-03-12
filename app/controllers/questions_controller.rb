@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
     @question.build_correct_answer
-    3.times {@question.answers.build}
+    setup_answers
   end
 
   # GET /questions/1/edit
@@ -32,6 +32,10 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
+    answers_param = params[:question][:answers_attributes]["0"][:content]
+    answers_param.each.with_index(1) do |answer, index|
+      @question.answers.build(:content => answer, :correct => false)
+    end
 
     respond_to do |format|
       if @question.save
@@ -82,6 +86,12 @@ class QuestionsController < ApplicationController
                                        :content,
                                        correct_answer_attributes: [:correct, :content],
                                        answers_attributes: [:correct, :content, :id])
+    end
+
+    def setup_answers
+      3.times do
+        @question.answers.build
+      end
     end
 
     def update_answers
