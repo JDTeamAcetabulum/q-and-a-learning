@@ -70,8 +70,12 @@ class QuestionsController < ApplicationController
 
   # This method is used when a student answers a question and submits the form.
   def submit_question
+    debugger
     current_user.questions << Question.find_by_id(params[:question])
     current_user.answers << Answer.find_by_id(params[:answer])
+    respond_to do |format|
+      format.html { redirect_to questions_url, notice: 'Questions successfully answered.' }
+    end
   end
 
   private
