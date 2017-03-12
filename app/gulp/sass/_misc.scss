@@ -1,0 +1,6 @@
+// For rules that belong on every page and don't fit elsewhere
+
+textarea {
+  // Skeleton sets an absolute height on textarea, which breaks the rows attribute
+  height: unset;
+}

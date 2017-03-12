@@ -7,14 +7,14 @@ class Question < ApplicationRecord
   has_many :lecturetaggings
   has_many :lectures, through: :lecturetaggings, dependent: :destroy
   has_one :correct_answer, ->{ where(correct: true) }, class_name: "Answer",
-          foreign_key: "question_id"
+    foreign_key: "question_id"
 
   accepts_nested_attributes_for :answers, :correct_answer
   validates :correct_answer, presence: true
 
   def all_topics=(names)
     self.topics = names.split(",").map do |name|
-        Topic.where(name: name.strip).first_or_create!
+      Topic.where(name: name.strip).first_or_create!
     end
   end
 
@@ -24,11 +24,13 @@ class Question < ApplicationRecord
 
   def all_lectures=(names)
     self.lectures = names.split(",").map do |name|
-        Lecture.where(name: name.strip).first_or_create!
+
+      Lecture.where(name: name.strip).first_or_create!
     end
   end
 
   def all_lectures
     self.lectures.map(&:name).join(", ")
   end
+
 end
