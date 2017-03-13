@@ -36,9 +36,11 @@ class QuestionsController < ApplicationController
     answers_param.each.with_index(1) do |answer, index|
       @question.answers.build(:content => answer, :correct => false)
     end
+    @question.published_at = Time.zone.now if publishing?
 
     respond_to do |format|
       if @question.save
+        @question.published_at = Time.zone.now if publishing?
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -51,6 +53,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @question.published_at = Time.zone.now if publishing?
     respond_to do |format|
       if @question.update(question_params)
         @question.correct_answer.update(question_params[:correct_answer_attributes])
@@ -98,5 +101,9 @@ class QuestionsController < ApplicationController
       question_params[:answers_attributes].each do |key, val|
         Answer.find_by_id(val['id']).update_attribute(:content, val['content'])
       end
+    end
+
+    def publishing?
+      params[:commit] == "Publish"
     end
 end
