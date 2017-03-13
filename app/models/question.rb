@@ -28,6 +28,7 @@ class Question < ApplicationRecord
 
   def all_lectures=(names)
     self.lectures = names.split(",").map do |name|
+
       Lecture.where(name: name.strip).first_or_create!
     end
   end

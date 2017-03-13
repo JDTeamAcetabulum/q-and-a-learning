@@ -1,5 +1,4 @@
 %p#notice= notice
-
 %p
   %b Created by:
   = get_user(@question.user_id).username
@@ -7,10 +6,14 @@
   %p
     = @question.content
   %h2 Answers:
-  - @question.answers.each.with_index do |a,i|
-    - if a.content != nil
+  = form_tag submit_question_url do
+    = hidden_field_tag 'question', @question.id
+    - @question.answers.each.with_index do |a,i|
       = label_tag a.content
-      = radio_button :answer, "value", id: i
+      = radio_button_tag :answer, a.id
+    %br
+    = submit_tag 'submit'
+
 
 
 = link_to 'Edit', edit_question_path(@question)

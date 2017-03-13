@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   post '/login', to: 'login#create'
   delete '/logout', to: 'login#destroy'
 
-  get'questions/short', as: :short_question
-
   resources :users
   resources :questions
+  get 'questions/short', as: :short_question
+  post 'questions/submit', to: 'questions#submit_question', as: :submit_question
 end
