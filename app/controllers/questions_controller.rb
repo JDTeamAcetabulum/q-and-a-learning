@@ -119,8 +119,15 @@ class QuestionsController < ApplicationController
     end
 
     def update_answers
-      question_params[:answers_attributes].each do |key, val|
-        Answer.find_by_id(val['id']).update_attribute(:content, val['content'])
+      keep = []
+      params[:question][:answers_attributes].each do |key, val|
+        keep.push(val['id'])
+        Answer.find_by_id(val['id']).update_attributes(:content => val[:content][0])
+      end
+      @question.answers.each do |answer|
+        if !answer.correct? && !keep.include?(answer[:id].to_s)
+          answer.destroy
+        end
       end
     end
 

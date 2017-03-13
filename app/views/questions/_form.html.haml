@@ -28,12 +28,10 @@
       = g.hidden_field :correct, value: true
 
   #wrong-answers
-    - @question.answers.each do |a|
+    - @question.answers.each.with_index do |a, i|
       = f.fields_for :answers, a do |g|
         - if !a.correct?
-          = render 'answer', f: g, ans: a
-          #new-answer{:style => "display: none;"}
-            = render 'answer', f: g, ans: a
+          = render 'answer', f: g, ans: a, i: i
 
   %button#add-answer +
 
