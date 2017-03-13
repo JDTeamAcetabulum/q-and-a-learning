@@ -74,10 +74,18 @@ class QuestionsController < ApplicationController
 
   # This method is used when a student answers a question and submits the form.
   def submit_question
-    current_user.questions << Question.find_by_id(params[:question])
-    current_user.answers << Answer.find_by_id(params[:answer])
+    updated = false
+    if params[:question] && params[:answer]
+      @question = Question.find_by_id(params[:question])
+      current_user.answers << Answer.find_by_id(params[:answer])
+      updated = true
+    end
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Questions successfully answered.' }
+      if updated
+        format.html { redirect_to questions_url, notice: 'Questions successfully answered.' }
+      else
+        format.html { redirect_to :back, notice: 'You must select an answer' }
+      end
     end
   end
 
