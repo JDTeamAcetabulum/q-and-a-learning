@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
     @question.build_correct_answer
-    @question.answers.build
+    setup_answers
   end
 
   # GET /questions/1/edit
@@ -32,13 +32,19 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-    answers_param = params[:question][:answers_attributes]["0"][:content]
-    answers_param.each.with_index(1) do |answer, index|
-      @question.answers.build(:content => answer, :correct => false)
+    answers_param = params[:question][:answers_attributes]
+    answers_param.each_with_index do |(key,value), index|
+      if defined? @question.answers[index]
+        @question.answers[index].update_attributes(:content => value[:content][0], :correct => value[:correct])
+      else
+        @question.answers.build(:content => value[:content][0], :correct => value[:correct])
+      end
     end
+    @question.published_at = Time.zone.now if publishing?
 
     respond_to do |format|
       if @question.save
+        @question.published_at = Time.zone.now if publishing?
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -51,8 +57,11 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @question.published_at = Time.zone.now if publishing?
     respond_to do |format|
       if @question.update(question_params)
+        @question.correct_answer.update(question_params[:correct_answer_attributes])
+        update_answers
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else
@@ -100,6 +109,22 @@ class QuestionsController < ApplicationController
       params.require(:question).permit(:user_id, :all_topics, :all_lectures,
                                        :content,
                                        correct_answer_attributes: [:correct, :content],
-                                       answers_attributes: [:correct, :content])
+                                       answers_attributes: [:correct, :content, :id])
+    end
+
+    def setup_answers
+      3.times do
+        @question.answers.build
+      end
+    end
+
+    def update_answers
+      question_params[:answers_attributes].each do |key, val|
+        Answer.find_by_id(val['id']).update_attribute(:content, val['content'])
+      end
+    end
+
+    def publishing?
+      params[:commit] == "Publish"
     end
 end

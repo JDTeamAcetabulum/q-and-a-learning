@@ -11,6 +11,10 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :answers, :correct_answer
   validates :correct_answer, presence: true
+ 
+  	def published
+  		published_at
+  	end
 
   def all_topics=(names)
     self.topics = names.split(",").map do |name|
@@ -32,5 +36,4 @@ class Question < ApplicationRecord
   def all_lectures
     self.lectures.map(&:name).join(", ")
   end
-
 end

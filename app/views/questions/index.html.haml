@@ -7,6 +7,7 @@
       %th Lectures
       %th Topics
       %th Content
+      %th Published At
       %th Actions
 
   %tbody
@@ -16,13 +17,13 @@
         %td= question.all_lectures
         %td= question.all_topics
         %td= question.content
+        %td= question.published
         %td
           = link_to 'Show', question
           \-
           = link_to 'Edit', edit_question_path(question)
           \-
           = link_to 'Destroy', question, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
 %br
 
 - if is_instructor?
