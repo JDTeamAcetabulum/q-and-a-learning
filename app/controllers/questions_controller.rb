@@ -33,7 +33,6 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     answers_param = params[:question][:answers_attributes]
-    p params[:question][:answer_attributes]
     answers_param.each_with_index do |(key,value), index|
       if defined? @question.answers[index]
         @question.answers[index].update_attributes(:content => value[:content][0], :correct => value[:correct])
