@@ -17,3 +17,4 @@
 //= require turbolinks
 //= require_tree .
 //= require gulp/app
+//= require d3

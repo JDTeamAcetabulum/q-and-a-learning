@@ -84,3 +84,11 @@ nav {
   margin-left: $sidebar-width + $content-margin * 2;
   margin-right: $content-margin;
 }
+
+.invisible {
+  display: none;
+}
+
+.block {
+  display: inline-block;
+}

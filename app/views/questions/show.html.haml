@@ -1,4 +1,7 @@
 %p#notice= notice
+
+.question_class{ data: {results: @results.to_json, answers: @question.answers.to_json } }
+
 %p
   %b Created by:
   = get_user(@question.user_id).username
@@ -15,7 +18,13 @@
     = submit_tag 'submit'
 
 
+#review.invisible
+  %svg#graph
 
-= link_to 'Edit', edit_question_path(@question)
-\|
-= link_to 'Back', questions_path
+%button#show-results Show Results
+<br/>
+
+%div.block
+  = button_to 'Edit', edit_question_path(@question), :method => "get"\
+%div.block
+  = button_to 'Back', questions_path, :method => "get"

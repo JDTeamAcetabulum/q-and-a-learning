@@ -70,3 +70,5 @@ group :test do
   gem 'minitest-ci'
   gem 'simplecov', require: false
 end
+
+gem 'd3-rails', '4.7.0'

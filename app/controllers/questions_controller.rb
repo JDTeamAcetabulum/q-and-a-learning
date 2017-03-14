@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @results = Answer.joins(:users).group("answers.id").count
   end
 
   # GET /questions/new
