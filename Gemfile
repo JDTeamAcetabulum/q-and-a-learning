@@ -42,6 +42,8 @@ gem 'npm-pipeline-rails', '~> 1.7'
 
 # Data visualization library
 gem 'd3-rails', '4.7.0'
+# SVG icons library
+gem 'font-awesome-rails', '~> 4.7'
 # Fancy tables with datatables
 gem 'jquery-datatables-rails', '~> 3.4.0'
 # Use jquery as the JavaScript library

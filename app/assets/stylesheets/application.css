@@ -14,5 +14,6 @@
  *= require normalize
  *= require skeleton
  *= require dataTables/jquery.dataTables
+ *= require font-awesome
  *= require gulp/app
  */
