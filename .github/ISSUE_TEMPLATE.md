@@ -37,8 +37,22 @@ In the title, use the form "As a [user type], I want to [purpose] so I can [reas
 TEMPLATE FOR BUG REPORTS
 
 Be sure to include the following in a bug report:
-- Explanation of issue/severity (label "high priority" if show-stopping)
-- Steps to reproduce (if known)
+- Explanation
+  - When does this issue occur?
+  - What is the actual expected behavior?
+  - What do you think is causing it?
+  - Is there any context that the reader should be aware of?
+- Steps to reproduce
+  - Boil down how to reproduce the issue into a few steps
+- Severity
+  - Trivial, minor, major, or blocker
+  - Label "high priority" if show-stopping
+
+## Explanation
+
+## Steps to reproduce
+
+## Severity
 -->
 
 <!-- If you're not creating any of the above (e.g. a question/design issue), you can ignore/delete the other sections. -->

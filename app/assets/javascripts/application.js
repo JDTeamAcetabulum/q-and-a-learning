@@ -10,11 +10,15 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// Must come first
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//
+// Miscellaneous assets
+//= require d3
 //= require dataTables/jquery.dataTables
 //= require turbolinks
-//= require_tree .
+//
+// Lastly, pull from the gulp pipeline
 //= require gulp/app
-//= require d3

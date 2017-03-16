@@ -8,7 +8,6 @@
     = stylesheet_link_tag    'application', media: 'all', |
       'data-turbolinks-track': 'reload'                   |
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    %link(rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     /[if lt IE 9]
       <script src='//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js'>
       </script>
@@ -25,30 +24,30 @@
               (instructor)
           \-
           = link_to(logout_path, method: "delete") do
-            %i.fa.fa-sign-out(aria-hidden='true')
+            = fa_icon "sign-out"
             logout
       %nav#menu
         %ul
           %li
             = link_to('/home') do
-              %i.fa.fa-home.fa-fw(aria-hidden='true')
+              = fa_icon "home fw"
               Home
           %li
             = link_to('/questions') do
-              %i.fa.fa-question-circle.fa-fw(aria-hidden='true')
+              = fa_icon "question-circle fw"
               Questions
           %li
             %a{:href => '#'}
-              %i.fa.fa-bar-chart-o.fa-fw(aria-hidden='true')
+              = fa_icon "bar-chart-o fw"
               Statistics
           - if is_instructor?
             %li
               = link_to('/users') do
-                %i.fa.fa-th-list.fa-fw(aria-hidden='true')
+                = fa_icon "th-list fw"
                 Roster
           %li
             %a{:href => '#'}
-              %i.fa.fa-cog.fa-fw(aria-hidden='true')
+              = fa_icon "cog fw"
               Settings
     #content.container
       - if check_privilege(controller_name, action_name)
