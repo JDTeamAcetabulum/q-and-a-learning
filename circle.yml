@@ -1,8 +1,4 @@
 dependencies:
-  pre:
-    # Replace default bundler version, which is a bit older
-    - yes y | gem uninstall bundler
-    - gem install bundler --pre
   post:
     - npm run build
 
