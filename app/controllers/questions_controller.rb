@@ -11,6 +11,12 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show
     @results = Answer.joins(:users).group("answers.id").count
+    # Answer given by the student, if present
+    answers = Answer.joins(:users)
+      .where("question_id = '#{@question.id.to_s}'")
+      .where("user_id = '#{current_user[:id].to_s}'")
+    @answered = !@answers.blank?
+    @answer = @answered ? answers[0] : nil
   end
 
   # GET /questions/new
@@ -36,7 +42,8 @@ class QuestionsController < ApplicationController
     answers_param = params[:question][:answers_attributes]
     answers_param.each_with_index do |(key,value), index|
       if defined? @question.answers[index]
-        @question.answers[index].update_attributes(:content => value[:content][0], :correct => value[:correct])
+        @question.answers[index]
+          .update_attributes(:content => value[:content][0], :correct => value[:correct])
       else
         @question.answers.build(:content => value[:content][0], :correct => value[:correct])
       end

@@ -11,20 +11,22 @@
   %h2 Answers:
   = form_tag submit_question_url do
     = hidden_field_tag 'question', @question.id
-    - @question.answers.each.with_index do |a,i|
+    - @question.answers.each do |a|
       = label_tag a.content
-      = radio_button_tag :answer, a.id, required: true
+      = radio_button_tag :answer, a.id, a == @answer, required: true, disabled: @answered || is_instructor?
     %br
-    = submit_tag 'submit'
+    - if not @answered and not is_instructor?
+      = submit_tag 'submit'
 
 
 #review.invisible
   %svg#graph
 
 %button#show-results Show Results
-<br/>
+%br
 
-%div.block
-  = button_to 'Edit', edit_question_path(@question), :method => "get"\
+- if is_instructor?
+  %div.block
+    = button_to 'Edit', edit_question_path(@question), :method => "get"
 %div.block
   = button_to 'Back', questions_path, :method => "get"
