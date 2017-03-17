@@ -11,7 +11,9 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show
     @results = Answer.joins(:users).group("answers.id").count
-    @notanswered = User.joins(:answers).where("question_id = '" + @question.id.to_s + "'").where("user_id = '" + current_user[:id].to_s + "'").blank?
+    @notanswered = User.joins(:answers)
+      .where("question_id = '#{@question.id.to_s}'")
+      .where("user_id = '#{current_user[:id].to_s}'").blank?
   end
 
   # GET /questions/new
@@ -37,7 +39,8 @@ class QuestionsController < ApplicationController
     answers_param = params[:question][:answers_attributes]
     answers_param.each_with_index do |(key,value), index|
       if defined? @question.answers[index]
-        @question.answers[index].update_attributes(:content => value[:content][0], :correct => value[:correct])
+        @question.answers[index]
+          .update_attributes(:content => value[:content][0], :correct => value[:correct])
       else
         @question.answers.build(:content => value[:content][0], :correct => value[:correct])
       end
