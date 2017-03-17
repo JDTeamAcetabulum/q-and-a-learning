@@ -41,11 +41,11 @@ class QuestionsController < ApplicationController
         @question.answers.build(:content => value[:content][0], :correct => value[:correct])
       end
     end
-    @question.published_at = Time.zone.now if publishing?
+    @question.published_at = Time.current if publishing?
 
     respond_to do |format|
       if @question.save
-        @question.published_at = Time.zone.now if publishing?
+        @question.published_at = Time.current if publishing?
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -58,7 +58,7 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    @question.published_at = Time.zone.now if publishing?
+    @question.published_at = Time.current if publishing?
     respond_to do |format|
       if @question.update(question_params)
         @question.correct_answer.update(question_params[:correct_answer_attributes])
