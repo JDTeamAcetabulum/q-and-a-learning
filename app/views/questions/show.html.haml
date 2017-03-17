@@ -11,11 +11,11 @@
   %h2 Answers:
   = form_tag submit_question_url do
     = hidden_field_tag 'question', @question.id
-    - @question.answers.each.with_index do |a,i|
+    - @question.answers.each do |a|
       = label_tag a.content
-      = radio_button_tag :answer, a.id, required: true
+      = radio_button_tag :answer, a.id, a == @answer, required: true, disabled: @answered || is_instructor?
     %br
-    - if @notanswered
+    - if not @answered and not is_instructor?
       = submit_tag 'submit'
 
 

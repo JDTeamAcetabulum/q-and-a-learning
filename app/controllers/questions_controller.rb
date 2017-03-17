@@ -11,9 +11,12 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show
     @results = Answer.joins(:users).group("answers.id").count
-    @notanswered = User.joins(:answers)
+    # Answer given by the student, if present
+    answers = Answer.joins(:users)
       .where("question_id = '#{@question.id.to_s}'")
-      .where("user_id = '#{current_user[:id].to_s}'").blank?
+      .where("user_id = '#{current_user[:id].to_s}'")
+    @answered = !@answers.blank?
+    @answer = @answered ? answers[0] : nil
   end
 
   # GET /questions/new
