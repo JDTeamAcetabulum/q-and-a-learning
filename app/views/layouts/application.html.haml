@@ -20,13 +20,14 @@
           Logged in as
           = link_to(@current_user) do
             = @current_user.username
-            - if @current_user.role == 'instructor'
+            - if is_instructor?
               (instructor)
           \-
           = link_to(logout_path, method: "delete") do
             = fa_icon "sign-out"
             logout
       %nav#menu
+        %hr
         %ul
           %li
             = link_to('/home') do
@@ -49,6 +50,7 @@
             %a{:href => '#'}
               = fa_icon "cog fw"
               Settings
+        %hr
     #content.container
       - if check_privilege(controller_name, action_name)
         = yield
