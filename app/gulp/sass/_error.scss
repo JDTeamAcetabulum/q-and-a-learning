@@ -52,3 +52,14 @@ div.actions {
 label {
   display: block;
 }
+
+.error {
+  background-color: #fcaaa1;
+  height: $larger;
+  line-height: $larger;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+  color: red;
+}
