@@ -15,7 +15,8 @@
       = label_tag a.content
       = radio_button_tag :answer, a.id, required: true
     %br
-    = submit_tag 'submit'
+    - if @notanswered
+      = submit_tag 'submit'
 
 
 #review.invisible
