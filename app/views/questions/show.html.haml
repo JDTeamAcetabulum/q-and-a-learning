@@ -23,9 +23,10 @@
   %svg#graph
 
 %button#show-results Show Results
-<br/>
+%br
 
-%div.block
-  = button_to 'Edit', edit_question_path(@question), :method => "get"\
+- if is_instructor?
+  %div.block
+    = button_to 'Edit', edit_question_path(@question), :method => "get"
 %div.block
   = button_to 'Back', questions_path, :method => "get"
