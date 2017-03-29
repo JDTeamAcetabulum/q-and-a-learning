@@ -97,6 +97,14 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def export
+    questions = Question.all
+
+    respond_to do |format|
+      format.csv { send_data questions.to_csv, filename: "questions-#{Date.today}.csv" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question

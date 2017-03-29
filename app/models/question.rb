@@ -12,8 +12,16 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :answers, :correct_answer
   validates :correct_answer, presence: true
 
+  def self.to_csv
+    CSV.generate do |csv|
+      all.each do |question|
+        csv << question.attributes.values_at("content")
+      end
+    end
+  end
+
   def published
-  	published_at
+    published_at
   end
 
   def published?
