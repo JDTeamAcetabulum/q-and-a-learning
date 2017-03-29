@@ -38,7 +38,7 @@
               = fa_icon "question-circle fw"
               Questions
           %li
-            %a{:href => '#'}
+            = link_to('/statistics') do
               = fa_icon "bar-chart-o fw"
               Statistics
           - if is_instructor?
