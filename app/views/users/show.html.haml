@@ -1,4 +1,22 @@
 - provide(:title, @user.username)
-%h1
-  = gravatar_for @user
-  = @user.username
+
+%h1= "#{@user.role.capitalize}: #{@user.username}"
+
+- if not @user.is_instructor?
+  - if @answers.nil? || @answers.empty?
+    %p This student hasn't answered any questions.
+
+  - else
+    %table#student-answers-table
+      %thead
+        %tr
+          %th Question
+          %th Answer
+          %th Correct?
+
+      %tbody
+        - @answers.zip(@questions).each do |answer, question|
+          %tr
+            %td= link_to question.content, question
+            %td= answer.content
+            %td= answer.correct
