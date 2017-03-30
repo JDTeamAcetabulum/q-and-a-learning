@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   resources :users
   resources :questions do
     collection do
-      get 'export', defaults: { format: 'csv' }
+      get 'export'
     end
   end
   get 'questions/short', as: :short_question
   post 'questions/submit', to: 'questions#submit_question', as: :submit_question
+  post 'questions/export', to: 'questions#export_csv', defaults: { format: 'csv' }
 end

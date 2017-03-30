@@ -98,7 +98,26 @@ class QuestionsController < ApplicationController
   end
 
   def export
-    questions = Question.all
+    @questions = Question.all
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def export_csv
+    lecture_ids = params[:question][:lecture_ids]
+    topic_ids = params[:question][:topic_ids]
+    question_ids = params[:question][:question_ids]
+
+    question_ids << Lecture.where(id: lecture_ids).each do |l|
+      l.question.id
+    end
+
+    question_ids << Topic.where(id: topic_ids).each do |t|
+      t.question.id
+    end
+
+    questions = Question.where(id: question_ids)
 
     respond_to do |format|
       format.csv { send_data questions.to_csv, filename: "questions-#{Date.today}.csv" }
