@@ -63,4 +63,13 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
+
+  test "is_instructor? helper works correctly" do
+    @user.role = "instructor"
+    assert @user.is_instructor?
+
+    @user.role = "student"
+    assert_not @user.is_instructor?
+  end
+
 end
