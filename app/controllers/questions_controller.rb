@@ -104,7 +104,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def export_csv
+  def build_csv
     lecture_ids = params[:question][:lecture_ids]
     topic_ids = params[:question][:topic_ids]
     question_ids = params[:question][:question_ids]
