@@ -109,12 +109,16 @@ class QuestionsController < ApplicationController
     topic_ids = params[:question][:topic_ids]
     question_ids = params[:question][:question_ids]
 
-    question_ids << Lecture.where(id: lecture_ids).each do |l|
-      l.question.id
+    Lecture.where(id: lecture_ids).each do |l|
+      l.questions.each do |q|
+        question_ids << q.id
+      end
     end
 
-    question_ids << Topic.where(id: topic_ids).each do |t|
-      t.question.id
+    Topic.where(id: topic_ids).each do |t|
+      t.question.each do |q|
+        question_ids << q.id
+      end
     end
 
     questions = Question.where(id: question_ids)
