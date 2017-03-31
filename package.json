@@ -31,9 +31,11 @@
       "jquery": true
     },
     "globals": {
-      "d3": true
+      "d3": true,
+      "onPage": true
     },
     "rules": {
+      "no-mixed-operators": ["off"],
       "no-param-reassign": [
         "error",
         {

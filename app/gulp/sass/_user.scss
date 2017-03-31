@@ -1,0 +1,9 @@
+@import '_common';
+
+#num-correct-chart {
+  padding-bottom: $medium;
+
+  rect {
+    stroke-width: 2;
+  }
+}

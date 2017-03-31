@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    if not @user.is_instructor?
+      # List of this user's questions and answers
+      @answers = @user.answers.where.not(question_id: nil)
+      @questions = @answers.map{ |answer| answer.question }
+
+      @num_correct = @answers.where(correct: true).length
+      @num_incorrect = @answers.length - @num_correct
+    end
   end
 
   def new
