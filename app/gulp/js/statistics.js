@@ -28,7 +28,11 @@ $('body.statistics.index').ready(() => {
     const color = d3.scaleOrdinal(d3.schemeCategory10);
 
     const xAxis = d3.axisBottom(xScale);
-    const yAxis = d3.axisLeft(yScale).tickValues([0, 1, 2, 3, 4]);
+    const integers = [];
+    for (let i = 0; i < 1000; i += 1) {
+      integers.push(i);
+    }
+    const yAxis = d3.axisLeft(yScale).tickValues(integers);
 
     const stack = d3.stack()
       .keys(['correct', 'incorrect']);
