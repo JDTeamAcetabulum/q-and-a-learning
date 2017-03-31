@@ -1,5 +1,5 @@
-%h1 Statistics#index
+%h1#title Statistics
 
-.stats_class{ data: {results: @results.to_json } }
+.stats_class{ data: {results: @results.to_json, questions: @questions.to_json } }
 
-%svg#graph
+%svg#graph{ :style => "height:100%; width:100%;" }

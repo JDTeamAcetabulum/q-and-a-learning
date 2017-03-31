@@ -1,47 +1,113 @@
 $('body.statistics.index').ready(() => {
   function draw(data) {
-    const color = d3.scaleOrdinal(d3.schemeCategory20b);
-    const margin = { top: 20, right: 20, bottom: 30, left: 80 };
-    const width = 480 - margin.left - margin.right;
-    const height = 250 - margin.top - margin.bottom;
+    const h = $('#graph').height();
+    const th = $('#title').outerHeight(true);
+    console.log(h - th);
+    $('#graph').height(h - th);
+    const element = document.getElementById('graph');
 
-    const y = d3.scaleBand()
-      .range([height, 0])
-      .padding(0.1);
+    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    const width = element.clientWidth - margin.left - margin.right;
+    const height = element.clientHeight - margin.top - margin.bottom;
 
-    const x = d3.scaleLinear()
-      .range([0, width]);
-
-    const svg = d3.select('#graph')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
+    const svg = d3.select(element)
       .append('g')
         .attr('transform',
               `translate(${margin.left},${margin.top})`);
 
-    x.domain([0, d3.max(data, d => d.correct + d.incorrect)]);
-    y.domain(data.map(d => d.label));
+    const div = d3.select('body').append('div')
+        .attr('class', 'tooltip')
+        .style('opacity', 0);
 
-    svg.selectAll('.bar')
-        .data(data)
+    const xScale = d3.scaleBand()
+      .range([0, width])
+      .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+      .range([height, 0]);
+
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale);
+
+    const stack = d3.stack()
+      .keys(['correct', 'incorrect']);
+
+    const layers = stack(data);
+
+    xScale.domain(data.map(d => d.label));
+    yScale.domain([0, d3.max(layers[layers.length - 1], d => d[0] + d[1])]).nice();
+
+    const layer = svg.selectAll('.layer')
+      .data(layers)
+      .enter().append('g')
+      .attr('class', 'layer')
+      .style('fill', (d, i) => color(i));
+
+    layer.selectAll('rect')
+        .data(d => d)
       .enter().append('rect')
-        .attr('class', 'bar')
-        .attr('width', d => d.correct)
-        .attr('y', d => y(d.label))
-        .attr('height', y.bandwidth())
-        .style('fill', d => color(d.label + 1));
+        .attr('x', d => xScale(d.data.label))
+        .attr('y', d => yScale(d[1]))
+        .attr('width', xScale.bandwidth())
+        .attr('height', d => (yScale(d[0]) - yScale(d[1])))
+        .on('mousemove', function (d, i) {
+          d3.select(this).attr('opacity', 0.5);
+          div.transition()
+            .duration(20)
+            .style('opacity', 0.9);
+          console.log(d);
+          if (d.data.correct === d[1] - d[0]) {
+            div.html(`Q: ${d.data.label}<br/>Correct:${
+                d[1] - d[0]}`);
+          } else {
+            div.html(`Q: ${d.data.label}<br/>Incorrect:${
+                d[1] - d[0]}`);
+          }
+          div.style('left', `${d3.event.pageX + 15}px`)
+            .style('top', `${d3.event.pageY - 20}px`);
+        })
+        .on('mouseout', function (d, i) {
+          d3.select(this).attr('opacity', 1);
+          div.transition()
+            .duration(20)
+            .style('opacity', 0);
+        });
 
     svg.append('g')
-        .attr('transform', `translate(0,${height})`)
-        .call(d3.axisBottom(x));
+        .attr('class', 'axis axis--x')
+        .attr('transform', `translate(0,${height + 5})`)
+        .call(xAxis);
 
     svg.append('g')
-        .call(d3.axisLeft(y));
+        .attr('class', 'axis axis--y')
+        .attr('transform', 'translate(0,0)')
+        .call(yAxis);
+
+    svg.append('text')
+        .attr('class', 'y label')
+        .attr('text-anchor', 'end')
+        .attr('y', 6)
+        .attr('dy', '.75em')
+        .attr('transform', 'rotate(-90)')
+        .text('Total Answers');
+
+    svg.append('text')
+        .attr('class', 'x label')
+        .attr('text-anchor', 'end')
+        .attr('x', width)
+        .attr('y', height - 6)
+        .text('Questions');
   }
 
   function showStats() {
     const results = $('.stats_class').data('results');
-    console.log(results);
+    const q = $('.stats_class').data('questions');
+    const questions = {};
+    for (let i = 0; i < q.length; i += 1) {
+      questions[q[i].id] = q[i];
+    }
     if (!results) {
       return;
     }
@@ -49,19 +115,19 @@ $('body.statistics.index').ready(() => {
     for (let i = 0; i < results.length; i += 1) {
       if (results[i].question_id) {
         if (!qstats[results[i].question_id]) {
-          qstats[results[i].question_id] = [0, 0];
+          qstats[results[i].question_id] = { label: questions[results[i].question_id].content,
+            correct: 0,
+            incorrect: 0 };
         }
         if (results[i].correct) {
-          qstats[results[i].question_id][0] += 1;
+          qstats[results[i].question_id].correct += 1;
         } else {
-          qstats[results[i].question_id][1] += 1;
+          qstats[results[i].question_id].incorrect += 1;
         }
       }
     }
-    console.log(qstats);
-    draw([
-      { label: 'test', correct: '120', incorrect: '200' },
-    ]);
+    const data = $.map(qstats, (v, i) => [v]);
+    draw(data);
   }
   showStats();
 });
