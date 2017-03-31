@@ -10,7 +10,7 @@ class Question < ApplicationRecord
     foreign_key: "question_id"
 
   accepts_nested_attributes_for :answers, :correct_answer
-  validates :correct_answer, presence: true
+  validates :content, presence: true
 
   def published
   	published_at

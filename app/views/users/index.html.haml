@@ -1,7 +1,37 @@
 - provide(:title, "Roster")
-%h1
-  = "Roster"
-- @users.each do |u|
-  %p
-    = gravatar_for u
-    = u.username
+
+%h1 Roster
+
+%h3 Students
+
+%table#students-table
+  %thead
+    %tr
+      %th Username
+      %th Email
+      %th Actions
+
+  %tbody
+    - @users.select{ |user| not user.is_instructor? }.each do |user|
+      %tr
+        %td= user.username
+        %td= user.email
+        %td
+          = link_to 'Show', user
+
+%h3 Instructors
+
+%table#instructors-table
+  %thead
+    %tr
+      %th Username
+      %th Email
+      %th Actions
+
+  %tbody
+    - @users.select{ |user| user.is_instructor? }.each do |user|
+      %tr
+        %td= user.username
+        %td= user.email
+        %td
+          = link_to 'Show', user
