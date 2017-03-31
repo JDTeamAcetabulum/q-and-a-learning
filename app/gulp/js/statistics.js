@@ -2,7 +2,6 @@ $('body.statistics.index').ready(() => {
   function draw(data) {
     const h = $('#graph').height();
     const th = $('#title').outerHeight(true);
-    console.log(h - th);
     $('#graph').height(h - th);
     const element = document.getElementById('graph');
 
@@ -52,13 +51,12 @@ $('body.statistics.index').ready(() => {
         .attr('y', d => yScale(d[1]))
         .attr('width', xScale.bandwidth())
         .attr('height', d => (yScale(d[0]) - yScale(d[1])))
-        .on('mousemove', function (d, i) {
+        .on('mousemove', function noname(d, i) {
           d3.select(this).attr('opacity', 0.5);
           div.transition()
             .duration(20)
             .style('opacity', 0.9);
-          console.log(d);
-          if (d.data.correct === d[1] - d[0]) {
+          if (d[0] === 0 && d[1] === d.data.correct) {
             div.html(`Q: ${d.data.label}<br/>Correct:${
                 d[1] - d[0]}`);
           } else {
@@ -68,7 +66,7 @@ $('body.statistics.index').ready(() => {
           div.style('left', `${d3.event.pageX + 15}px`)
             .style('top', `${d3.event.pageY - 20}px`);
         })
-        .on('mouseout', function (d, i) {
+        .on('mouseout', function noname(d) {
           d3.select(this).attr('opacity', 1);
           div.transition()
             .duration(20)
@@ -126,7 +124,7 @@ $('body.statistics.index').ready(() => {
         }
       }
     }
-    const data = $.map(qstats, (v, i) => [v]);
+    const data = $.map(qstats, v => [v]);
     draw(data);
   }
   showStats();
