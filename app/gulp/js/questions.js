@@ -19,6 +19,23 @@ $('body.questions.edit').ready(() => {
   });
 });
 
+$('body.questions.export').ready(() => {
+  $('#by-lecture').click((e) => {
+    e.preventDefault();
+    $('#lecture-options').show();
+  });
+
+  $('#by-topic').click((e) => {
+    e.preventDefault();
+    $('#topic-options').show();
+  });
+
+  $('#by-question').click((e) => {
+    e.preventDefault();
+    $('#question-options').show();
+  });
+});
+
 // Code to initialize datatables in question list
 $('body.questions.index').ready(() => {
   $('#question-table').DataTable();
