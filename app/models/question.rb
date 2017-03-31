@@ -13,11 +13,25 @@ class Question < ApplicationRecord
   validates :correct_answer, presence: true
 
   def self.to_csv
+    attributes = %w(content correct_answer_content incorrect_answers_content)
     CSV.generate do |csv|
+      csv << attributes
       all.each do |question|
-        csv << question.attributes.values_at("content")
+        csv << attributes.map{ |attr| question.send(attr) }
       end
     end
+  end
+
+  def correct_answer_content
+    correct_answer.content
+  end
+
+  def incorrect_answers_content
+    content = []
+    answers.each do |a|
+      content << a.content
+    end
+    content
   end
 
   def published
