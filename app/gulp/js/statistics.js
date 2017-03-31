@@ -102,6 +102,8 @@ $('body.statistics.index').ready(() => {
   function showStats() {
     const results = $('.stats_class').data('results');
     const q = $('.stats_class').data('questions');
+    const uresults = $('.stats_class').data('uresults');
+    const u = $('.stats_class').data('users');
     const questions = {};
     for (let i = 0; i < q.length; i += 1) {
       questions[q[i].id] = q[i];
