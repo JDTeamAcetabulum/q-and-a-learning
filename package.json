@@ -34,6 +34,7 @@
       "d3": true
     },
     "rules": {
+      "no-mixed-operators": ["off"],
       "no-param-reassign": [
         "error",
         {
