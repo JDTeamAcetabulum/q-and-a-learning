@@ -22,6 +22,27 @@ class Question < ApplicationRecord
     end
   end
 
+  # Structure of the file should match the self.to_csv
+  # content of question -> content of correct answer -> array of content of
+  # incorrect answers
+  def self.import file, user
+    CSV.foreach( file.path, col_sep: ',', headers: true ) do |row|
+      correct_ans = Answer.create!(content: row[1], correct: true)
+      incorrect_ans = []
+      row[2].tr('[','').tr(']','').split(',').each do |r|
+        incorrect_ans << Answer.create!(content: r.tr('"',''), correct: false)
+      end
+
+      new = Question.create(content: row[0], correct_answer: correct_ans, user: user)
+
+      incorrect_ans.each do |a|
+        new.answers << a
+      end
+
+      new.save!
+    end
+  end
+
   def correct_answer_content
     correct_answer.content
   end
