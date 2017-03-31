@@ -1,5 +1,5 @@
 // Code to control adding/removing answer choices
-$('body.questions.edit').ready(() => {
+onPage('questions', 'edit', () => {
   let num = 10000; // We only support 10000 answers per question, get over it
   $('#add-answer').click((e) => {
     num -= 1;
@@ -20,11 +20,11 @@ $('body.questions.edit').ready(() => {
 });
 
 // Code to initialize datatables in question list
-$('body.questions.index').ready(() => {
+onPage('questions', 'index', () => {
   $('#question-table').DataTable();
 });
 
-$('body.questions.show').ready(() => {
+onPage('questions', 'show', () => {
   function draw(data) {
     const color = d3.scaleOrdinal(d3.schemeCategory20b);
     const margin = { top: 20, right: 20, bottom: 30, left: 80 };
