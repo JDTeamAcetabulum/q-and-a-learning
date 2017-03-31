@@ -1,12 +1,19 @@
 - provide(:title, @user.username)
 
 %h1= "#{@user.role.capitalize}: #{@user.username}"
+#user-role{ data: { role: @user.role } }
 
 - if not @user.is_instructor?
+  #student-data{ data: { numcorrect: @num_correct, numincorrect: @num_incorrect } }
+
   - if @answers.nil? || @answers.empty?
     %p This student hasn't answered any questions.
 
   - else
+    %h2 Summary
+    #num-correct-chart
+
+    %h2 Previous answers
     %table#student-answers-table
       %thead
         %tr
