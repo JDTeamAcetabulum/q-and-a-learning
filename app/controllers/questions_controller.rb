@@ -97,6 +97,37 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def export
+    @questions = Question.all
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def build_csv
+    lecture_ids = params[:question][:lecture_ids]
+    topic_ids = params[:question][:topic_ids]
+    question_ids = params[:question][:question_ids]
+
+    Lecture.where(id: lecture_ids).each do |l|
+      l.questions.each do |q|
+        question_ids << q.id
+      end
+    end
+
+    Topic.where(id: topic_ids).each do |t|
+      t.question.each do |q|
+        question_ids << q.id
+      end
+    end
+
+    questions = Question.where(id: question_ids)
+
+    respond_to do |format|
+      format.csv { send_data questions.to_csv, filename: "questions-#{Date.today}.csv" }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question

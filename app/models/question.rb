@@ -12,8 +12,30 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :answers, :correct_answer
   validates :content, presence: true
 
+  def self.to_csv
+    attributes = %w(content correct_answer_content incorrect_answers_content)
+    CSV.generate do |csv|
+      csv << attributes
+      all.each do |question|
+        csv << attributes.map{ |attr| question.send(attr) }
+      end
+    end
+  end
+
+  def correct_answer_content
+    correct_answer.content
+  end
+
+  def incorrect_answers_content
+    content = []
+    answers.each do |a|
+      content << a.content
+    end
+    content
+  end
+
   def published
-  	published_at
+    published_at
   end
 
   def published?

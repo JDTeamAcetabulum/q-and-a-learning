@@ -1,0 +1,50 @@
+= form_tag '/questions/export', method: :post do
+
+  %button#by-lecture Export By Lecture
+  \|
+  %button#by-topic Export By Topic
+  \|
+  %button#by-question Export Individual Questions
+
+  #lecture-options{ style: 'display: none;' }
+    %table#lecture-table
+      %thead
+        %tr
+          %th Lecture
+          %th Select
+      %tbody
+        = collection_check_boxes( :question, :lecture_ids, Lecture.all, :id, :name ) do |b|
+          %tr
+            %td= b.label
+            %td= b.check_box
+    %br
+
+  #topic-options{ style: 'display: none;' }
+    %table#topic-table
+      %thead
+        %tr
+          %th Topic
+          %th Select
+      %tbody
+        = collection_check_boxes( :question, :topic_ids, Topic.all, :id, :name ) do |b|
+          %tr
+            %td= b.label
+            %td= b.check_box
+    %br
+
+  #question-options{ style: 'display: none;' }
+    %table#question-table
+      %thead
+        %tr
+          %th Question
+          %th Select
+      %tbody
+        = collection_check_boxes( :question, :question_ids, Question.all, :id, :content ) do |b|
+          %tr
+            %td= b.label
+            %td= b.check_box
+    %br
+
+  %br
+  %br
+  = submit_tag 'Export'
