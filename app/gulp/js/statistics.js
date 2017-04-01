@@ -1,9 +1,9 @@
 $('body.statistics.index').ready(() => {
   function draw(data) {
-    const h = $('#graph').height();
+    const h = $('#question-results-chart').height();
     const th = $('#title').outerHeight(true);
-    $('#graph').height(h - th);
-    const element = document.getElementById('graph');
+    $('#question-results-chart').height(h - th);
+    const element = document.getElementById('question-results-chart');
 
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
     const width = element.clientWidth - margin.left - margin.right;

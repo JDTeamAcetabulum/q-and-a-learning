@@ -1,14 +1,4 @@
-html {
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  height: calc(100% - 80px);
-  width: 100%;
-}
-
-div.tooltip {
+.tooltip {
   position: absolute;
   text-align: center;
   padding: 2px;
@@ -18,4 +8,9 @@ div.tooltip {
   border-color: black;
   pointer-events: none;
   opacity: 0.3;
+}
+
+#question-results-chart {
+  height: 100%;
+  width: 100%;
 }

@@ -51,7 +51,7 @@
               = fa_icon "cog fw"
               Settings
         %hr
-    %div#content.container{ :style => "width:auto; height:100%" }
+    #content.container
       - if check_privilege(controller_name, action_name)
         = yield
       - else
