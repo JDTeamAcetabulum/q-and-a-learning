@@ -55,7 +55,7 @@ $('body.statistics.index').ready(() => {
         .attr('y', d => yScale(d[1]))
         .attr('width', xScale.bandwidth())
         .attr('height', d => (yScale(d[0]) - yScale(d[1])))
-        .on('mousemove', function noname(d, i) {
+        .on('mousemove', function tooltipMove(d) {
           d3.select(this).attr('opacity', 0.5);
           div.transition()
             .duration(20)
@@ -70,7 +70,7 @@ $('body.statistics.index').ready(() => {
           div.style('left', `${d3.event.pageX + 15}px`)
             .style('top', `${d3.event.pageY - 20}px`);
         })
-        .on('mouseout', function noname(d) {
+        .on('mouseout', function tooltipHide() {
           d3.select(this).attr('opacity', 1);
           div.transition()
             .duration(20)
@@ -104,17 +104,18 @@ $('body.statistics.index').ready(() => {
   }
 
   function showStats() {
-    const results = $('.stats_class').data('results');
-    const q = $('.stats_class').data('questions');
-    const uresults = $('.stats_class').data('uresults');
-    const u = $('.stats_class').data('users');
+    const statsData = $('.stats-data');
+    if (statsData.length === 0) { return; }
+
+    const rawData = statsData.data();
+    const results = rawData.results;
+    const q = rawData.questions;
     const questions = {};
+
     for (let i = 0; i < q.length; i += 1) {
       questions[q[i].id] = q[i];
     }
-    if (!results) {
-      return;
-    }
+
     const qstats = {};
     for (let i = 0; i < results.length; i += 1) {
       if (results[i].question_id) {
@@ -133,5 +134,6 @@ $('body.statistics.index').ready(() => {
     const data = $.map(qstats, v => [v]);
     draw(data);
   }
+
   showStats();
 });
