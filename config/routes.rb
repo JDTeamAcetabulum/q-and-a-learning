@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/login', to: 'login#login'
   post '/login', to: 'login#create'
   delete '/logout', to: 'login#destroy'
+  get '/statistics', to: 'statistics#index'
 
   resources :users
   resources :questions do
