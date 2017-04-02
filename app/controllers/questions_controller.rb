@@ -128,6 +128,21 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def import
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def import_csv
+    begin
+      Question.import(params[:file], current_user)
+      redirect_to questions_path, notice: 'Upload successful'
+    rescue
+      redirect_to questions_path, notice: 'Upload failed (bad CSV)'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_question
