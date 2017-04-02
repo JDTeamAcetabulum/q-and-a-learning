@@ -135,8 +135,12 @@ class QuestionsController < ApplicationController
   end
 
   def import_csv
-    Question.import(params[:file], current_user)
-    redirect_to questions_path, notice: "Upload Successful"
+    begin
+      Question.import(params[:file], current_user)
+      redirect_to questions_path, notice: 'Upload successful'
+    rescue
+      redirect_to questions_path, notice: 'Upload failed (bad CSV)'
+    end
   end
 
   private
