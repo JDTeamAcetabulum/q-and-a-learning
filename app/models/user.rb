@@ -15,4 +15,15 @@ class User < ApplicationRecord
   def is_instructor?
     self.role == 'instructor'
   end
+
+  def self.to_csv
+    attributes = %w{username email}
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |user|
+        csv << user.attributes.values_at(*attributes)
+      end
+    end
+  end
 end
