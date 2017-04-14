@@ -5,3 +5,8 @@
 %h2 Question results
 
 %svg#question-results-chart
+
+- if !is_instructor?
+  - @users.select{ |user| not user.is_instructor? }.each do |user|
+    %td
+      = link_to 'See Every Question', user
