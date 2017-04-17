@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/login', to: 'login#create'
   delete '/logout', to: 'login#destroy'
   get '/statistics', to: 'statistics#index'
+  get '/popup_question', to: 'questions#popup_question', :as => :popup_question
 
   resources :users
   resources :questions do

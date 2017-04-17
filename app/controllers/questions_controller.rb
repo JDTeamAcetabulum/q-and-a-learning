@@ -1,6 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
+  # GET /popup_question
+  def popup_question
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # GET /questions
   # GET /questions.json
   def index
