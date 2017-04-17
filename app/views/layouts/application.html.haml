@@ -53,7 +53,6 @@
         %hr
     #content.container
       #modal-window.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
-      = link_to 'Show Popup', popup_question_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}
       - if check_privilege(controller_name, action_name)
         = yield
       - else
