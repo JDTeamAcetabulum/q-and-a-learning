@@ -52,6 +52,7 @@
               Settings
         %hr
     #content.container
+      #modal-window.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
       - if check_privilege(controller_name, action_name)
         = yield
       - else

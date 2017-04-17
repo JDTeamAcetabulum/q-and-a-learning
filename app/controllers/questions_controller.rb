@@ -1,6 +1,38 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
+  # GET /popup_question
+  def popup_question
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def get_popup_html
+    render :partial => 'questions/popup_question'
+  end
+
+  def check_live_question
+    if $liveQ == 1
+      @question = Question.find($liveqn)
+      @results = Answer.joins(:users).group("answers.id").count
+      # Answer given by the student, if present
+      answers = Answer.joins(:users)
+        .where("question_id = '#{@question.id.to_s}'")
+        .where("user_id = '#{current_user[:id].to_s}'")
+      @answered = !answers.blank?
+      @answer = @answered ? answers[0] : nil
+      if @answered || @current_user[:role] == "instructor"
+        render :nothing => true
+      else
+        render :partial => 'questions/show'
+      end
+    else
+      render :nothing => true
+    end
+  end
+
   # GET /questions
   # GET /questions.json
   def index
@@ -15,7 +47,7 @@ class QuestionsController < ApplicationController
     answers = Answer.joins(:users)
       .where("question_id = '#{@question.id.to_s}'")
       .where("user_id = '#{current_user[:id].to_s}'")
-    @answered = !@answers.blank?
+    @answered = !answers.blank?
     @answer = @answered ? answers[0] : nil
   end
 

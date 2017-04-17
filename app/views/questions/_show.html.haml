@@ -1,0 +1,36 @@
+%p#notice= notice
+
+.question_class{ data: {results: @results.to_json, answers: @question.answers.to_json } }
+
+%p
+  %b Created by:
+  = get_user(@question.user_id).username
+  %h2 Question:
+  %p
+    = @question.content
+  %h2 Answers:
+  = form_tag submit_question_url do
+    = hidden_field_tag 'question', @question.id
+    - @question.answers.each do |a|
+      = label_tag a.content
+      = radio_button_tag :answer, a.id, a == @answer, required: true, disabled: @answered || is_instructor?
+    %br
+    - if not @answered and not is_instructor?
+      = submit_tag 'submit'
+
+
+#review
+  %svg#graph
+
+%div.block
+  %button#show-results Show Results
+  - if is_instructor?
+    %button
+      = link_to 'Make Live', show_live_question(:id => @question.id)
+%br
+
+- if is_instructor?
+  %div.block
+    = button_to 'Edit', edit_question_path(@question), :method => "get"
+%div.block
+  = button_to 'Back', questions_path, :method => "get"
