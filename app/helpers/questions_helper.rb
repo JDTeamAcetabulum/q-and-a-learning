@@ -1,7 +1,9 @@
 module QuestionsHelper
-  def show_live_question
+  def show_live_question(id)
     $liveQ = 1
-    $liveqn = params[:id]
+    id.each do |a|
+      $liveqn = a[1]
+    end
   end
 
   def end_live_question

@@ -22,7 +22,11 @@
 #review
   %svg#graph
 
-%button#show-results Show Results
+%div.block
+  %button#show-results Show Results
+  - if is_instructor?
+    %button
+      = link_to 'Make Live', show_live_question(:id => @question.id)
 %br
 
 - if is_instructor?
