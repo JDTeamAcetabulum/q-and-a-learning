@@ -20,7 +20,8 @@ class UsersController < ApplicationController
     @user[:role] = "student"
     if @user.save
       flash[:success] = "New user created!"
-      redirect_to @user
+      view_context.log_in @user
+      redirect_to home_path
     else
       render 'new'
     end
