@@ -3,5 +3,6 @@ class StatisticsController < ApplicationController
     @users = User.all
     @questions = Question.all
     @results = Answer.joins(:users)
+    @results2 = Users.joins(:answers)
   end
 end
