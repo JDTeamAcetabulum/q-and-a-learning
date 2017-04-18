@@ -30,11 +30,11 @@
 
 - if is_instructor?
   .nomargin
-    .block
-      = button_to 'New Question', new_question_path
-    .block
-      = button_to 'New Essay Question', short_question_path
-    .block
-      = button_to 'Export', export_questions_path
-    .block
-      = button_to 'Import', import_questions_path
+    %button.block
+      = link_to 'New Question', new_question_path
+    %button.block
+      = link_to 'New Essay Question', short_question_path
+    %button.block
+      = link_to 'Export', export_questions_path
+    %button.block
+      = link_to 'Import', import_questions_path
