@@ -2,12 +2,6 @@ dependencies:
   post:
     - npm run build
 
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: cs1332qna
-
 machine:
   # Ruby version specified in .ruby-version
   node:
