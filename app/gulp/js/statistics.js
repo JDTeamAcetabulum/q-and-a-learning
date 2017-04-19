@@ -1,8 +1,5 @@
 $('body.statistics.index').ready(() => {
-  function draw(data, users) {
-    const h = $('#question-results-chart').height();
-    const th = $('#title').outerHeight(true);
-    $('#question-results-chart').height(h - th);
+  function draw(data) {
     const element = document.getElementById('question-results-chart');
 
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
@@ -42,7 +39,7 @@ $('body.statistics.index').ready(() => {
     xScale.domain(data.map(d => d.label));
     yScale.domain([0, d3.max(layers[layers.length - 1], d => d[0] + d[1])]).nice();
 
-    let layer = svg.selectAll('.layer')
+    const layer = svg.selectAll('.layer')
       .data(layers)
       .enter().append('g')
       .attr('class', 'layer')
@@ -101,42 +98,20 @@ $('body.statistics.index').ready(() => {
         .attr('x', width)
         .attr('y', height - 6)
         .text('Questions');
-
-    const views = ['Questions', 'Users'];
-
-    function changeData() {
-      console.log(d3.select('select').property('value'));
-      const x1 = d3.scaleBand()
-          .padding(0.05);
-      x1.domain(['a', 'b', 'c', 'd']).rangeRound([0, xScale.bandwidth()]);
-      layer = svg.selectAll('.layer')
-        .data(data);
-      layer.selectAll('rect')
-        .data((d) => { console.log(d); return d; })
-        .attr('x', (d) => { console.log(d); return x1(d.key); })
-        .attr('width', d => x1.bandwidth());
-    }
-
-    const select = d3.select('#metachart')
-        .append('select')
-        .attr('class', 'select')
-        .on('change', changeData);
-
-    const options = select
-        .selectAll('option')
-        .data(views).enter()
-        .append('option')
-        .text(d => d);
   }
 
   function showStats() {
+    const h = $('#question-results-chart').height();
+    const th = $('#title').outerHeight(true);
+    $('#question-results-chart').height(h - th);
+
     const statsData = $('.stats-data');
     if (statsData.length === 0) { return; }
 
     const rawData = statsData.data();
     const results = rawData.results;
+    const userStats = rawData.userstats;
     const q = rawData.questions;
-    const users = rawData.users;
     const questions = {};
 
     for (let i = 0; i < q.length; i += 1) {
@@ -149,8 +124,7 @@ $('body.statistics.index').ready(() => {
         if (!qstats[results[i].question_id]) {
           qstats[results[i].question_id] = { label: questions[results[i].question_id].content,
             correct: 0,
-            incorrect: 0,
-            answers: [] };
+            incorrect: 0 };
         }
         if (results[i].correct) {
           qstats[results[i].question_id].correct += 1;
@@ -160,8 +134,37 @@ $('body.statistics.index').ready(() => {
       }
     }
     const data = $.map(qstats, v => [v]);
-    console.log(results);
-    draw(data, users);
+    const ustats = {};
+    for (let i = 0; i < userStats.length; i += 1) {
+      const dat = userStats[i].split(',');
+      ustats[i] = { label: dat[0], correct: parseInt(dat[1], 10), incorrect: parseInt(dat[2], 10) };
+    }
+    const udata = $.map(ustats, v => [v]);
+    console.log(udata);
+    draw(udata);
+
+    const views = ['Questions', 'Users'];
+
+    function changeData() {
+      const choice = d3.select('select').property('value');
+      d3.select(document.getElementById('question-results-chart')).select('g').remove();
+      if (choice === 'Questions') {
+        draw(data);
+      } else {
+        draw(udata);
+      }
+    }
+
+    const select = d3.select('#metachart')
+        .append('select')
+        .attr('class', 'select')
+        .on('change', changeData);
+
+    const options = select
+        .selectAll('option')
+        .data(views).enter()
+        .append('option')
+        .text(d => d);
   }
 
   showStats();
