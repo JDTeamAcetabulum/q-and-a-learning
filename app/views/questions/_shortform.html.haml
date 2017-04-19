@@ -1,0 +1,43 @@
+= form_for @question do |f|
+  - if @question.errors.any?
+    #error-explanation
+      %h5= "#{pluralize(@question.errors.count, "error")} prevented this question from being saved:"
+      %ul
+        - @question.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.hidden_field :user_id, value: current_user.id
+
+  .field
+    = f.label 'Content'
+    = f.text_area :content, cols: 40, rows: 10
+
+  .field
+    = f.label 'Topics (seperate with commas)'
+    = f.text_field :all_topics
+
+  .field
+    = f.label 'Lecture number'
+    = f.text_field :all_lectures
+
+  = f.fields_for :correct_answer do |g|
+    .field
+      - if !is_instructor?
+        = g.label 'Correct answer'
+        = g.text_field :content
+        = g.hidden_field :correct, value: true
+      - else
+        = g.hidden_field :content, value: "your answer"
+        = g.hidden_field :correct, value: true
+
+  #wrong-answers
+    - @question.answers.each.with_index do |a, i|
+      = f.fields_for :answers, a do |g|
+        - if !a.correct?
+          = render 'shortanswer', f: g, ans: a, i: i
+
+  .actions
+    = f.submit 'Save'
+
+    = f.submit 'Publish'

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       get 'import'
     end
   end
-  get 'questions/short', as: :short_question
+  get 'questions/short/:id', to: 'questions#short', as: :short_question
   post 'questions/submit', to: 'questions#submit_question', as: :submit_question
   post 'questions/export', to: 'questions#build_csv', defaults: { format: 'csv' }
   post 'questions/import', to: 'questions#import_csv', as: :upload_questions

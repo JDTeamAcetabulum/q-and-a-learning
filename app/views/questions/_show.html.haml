@@ -12,8 +12,14 @@
   = form_tag submit_question_url do
     = hidden_field_tag 'question', @question.id
     - @question.answers.each do |a|
-      = label_tag a.content
-      = radio_button_tag :answer, a.id, a == @answer, required: true, disabled: @answered || is_instructor?
+      - if a.content == "your answer"
+        = label_tag a.content
+        = text_field_tag :answer
+      - elsif a.content == "."
+      - else
+        = label_tag a.content
+        = radio_button_tag :answer, a.id, a == @answer, required: true, disabled: @answered || is_instructor?
+
     %br
     - if not @answered and not is_instructor?
       = submit_tag 'submit'

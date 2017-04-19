@@ -31,7 +31,7 @@
 - if is_instructor?
   = link_to 'New Multiple Choice Questions', new_question_path
   \|
-  = link_to 'New Short Answer Question', short_question_path
+  = link_to 'New Short Answer Question', short_question_path(:id)
   \|
   = link_to 'Export', export_questions_path
   \|

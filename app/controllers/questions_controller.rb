@@ -65,6 +65,11 @@ class QuestionsController < ApplicationController
   def short
     @question = Question.new
     @question.build_correct_answer
+    @question.answers.build
+    @question.published_at = Time.current if publishing?
+    respond_to do |format|
+      format.html
+    end
   end
 
   # POST /questions
@@ -210,5 +215,10 @@ class QuestionsController < ApplicationController
 
     def publishing?
       params[:commit] == "Publish"
+    end
+
+    def shortquestion_attributes
+      p params
+      params.require(:question).permit([:user_id, :content, :all_topics, :all_lectures])
     end
 end
