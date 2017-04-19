@@ -54,6 +54,15 @@ html, body {
   }
 }
 
+@media only screen and (max-width: $mobile-width) {
+  nav {
+    width: $sidebar-width-mobile;
+  }
+  #content {
+    margin-left: $sidebar-width-mobile + $content-margin * 2;
+  }
+}
+
 nav {
   position: fixed;
 
@@ -119,15 +128,16 @@ nav {
   display: none;
 }
 
-.block {
-  display: inline-block;
-}
-
-.nomargin {
+#question-action-buttons {
   margin-top: $large;
   margin-bottom: $large;
 
-  input, form {
-    margin-bottom: 0.1rem;
+  a {
+    color: darkslategrey;
+  }
+
+  button {
+    display: inline-block;
+    margin-bottom: 0.5rem;
   }
 }

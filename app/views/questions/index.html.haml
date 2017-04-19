@@ -29,12 +29,12 @@
 %br
 
 - if is_instructor?
-  .nomargin
-    .block
-      = button_to 'New Question', new_question_path
-    .block
-      = button_to 'New Essay Question', short_question_path
-    .block
-      = button_to 'Export', export_questions_path
-    .block
-      = button_to 'Import', import_questions_path
+  #question-action-buttons
+    %button
+      = link_to 'New Question', new_question_path
+    %button
+      = link_to 'New Essay Question', short_question_path
+    %button
+      = link_to 'Export', export_questions_path
+    %button
+      = link_to 'Import', import_questions_path
