@@ -142,8 +142,7 @@ $('body.statistics.index').ready(() => {
       ustats[i] = { label: dat[0], correct: parseInt(dat[1], 10), incorrect: parseInt(dat[2], 10) };
     }
     const udata = $.map(ustats, v => [v]);
-    console.log(udata);
-    draw(udata);
+    draw(data);
 
     const views = ['Questions', 'Users'];
 
