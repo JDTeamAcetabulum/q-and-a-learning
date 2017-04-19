@@ -1,8 +1,5 @@
 $('body.statistics.index').ready(() => {
-  function draw(data, users) {
-    const h = $('#question-results-chart').height();
-    const th = $('#title').outerHeight(true);
-    $('#question-results-chart').height(h - th);
+  function draw(data) {
     const element = document.getElementById('question-results-chart');
 
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
@@ -130,11 +127,16 @@ $('body.statistics.index').ready(() => {
   }
 
   function showStats() {
+    const h = $('#question-results-chart').height();
+    const th = $('#title').outerHeight(true);
+    $('#question-results-chart').height(h - th);
+
     const statsData = $('.stats-data');
     if (statsData.length === 0) { return; }
 
     const rawData = statsData.data();
     const results = rawData.results;
+    const userStats = rawData.userstats;
     const q = rawData.questions;
     const users = rawData.users;
     const questions = {};
@@ -160,8 +162,37 @@ $('body.statistics.index').ready(() => {
       }
     }
     const data = $.map(qstats, v => [v]);
-    console.log(results);
-    draw(data, users);
+    const ustats = {};
+    for (let i = 0; i < userStats.length; i += 1) {
+      const dat = userStats[i].split(',');
+      ustats[i] = { label: dat[0], correct: parseInt(dat[1], 10), incorrect: parseInt(dat[2], 10) };
+    }
+    const udata = $.map(ustats, v => [v]);
+    console.log(udata);
+    draw(udata);
+
+    const views = ['Questions', 'Users'];
+
+    function changeData() {
+      const choice = d3.select('select').property('value');
+      d3.select(document.getElementById('question-results-chart')).select('g').remove();
+      if (choice === 'Questions') {
+        draw(data);
+      } else {
+        draw(udata);
+      }
+    }
+
+    const select = d3.select('#metachart')
+        .append('select')
+        .attr('class', 'select')
+        .on('change', changeData);
+
+    const options = select
+        .selectAll('option')
+        .data(views).enter()
+        .append('option')
+        .text(d => d);
   }
 
   showStats();
