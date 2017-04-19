@@ -17,7 +17,7 @@
           %td= get_user(question.user_id).username
           %td= question.all_lectures
           %td= question.all_topics
-          %td= question.content
+          %td= truncate(question.content)
           %td= question.published
           %td
             = link_to 'Show', question
@@ -29,10 +29,10 @@
 %br
 
 - if is_instructor?
-  = link_to 'New Multiple Choice Questions', new_question_path
-  \|
-  = link_to 'New Short Answer Question', short_question_path(:id)
-  \|
-  = link_to 'Export', export_questions_path
-  \|
-  = link_to 'Import', import_questions_path
+
+  #question-action-buttons
+    = button_to 'New Question', new_question_path, :method => :get
+    = button_to 'New Essay Question', short_question_path(:id), :method => :get
+    = button_to 'Export', export_questions_path, :method => :get
+    = button_to 'Import', import_questions_path, :method => :get
+

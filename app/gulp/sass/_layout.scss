@@ -4,7 +4,10 @@
 
 $content-margin: $small;
 $sidebar-width: 22rem;
+$sidebar-width-mobile: 5rem;
 $top-bar-height: 5rem;
+
+$mobile-width: 667px;
 
 * {
   box-sizing: border-box; // Padding and margin subtract from width
@@ -48,6 +51,15 @@ html, body {
     a {
       text-decoration: none;
     }
+  }
+}
+
+@media only screen and (max-width: $mobile-width) {
+  nav {
+    width: $sidebar-width-mobile;
+  }
+  #content {
+    margin-left: $sidebar-width-mobile + $content-margin * 2;
   }
 }
 
@@ -100,10 +112,33 @@ nav {
   width: auto;
 }
 
+@media only screen and (max-width: $mobile-width) {
+  nav {
+    width: $sidebar-width-mobile;
+  }
+  #content {
+    margin-left: $sidebar-width-mobile + $content-margin * 2;
+  }
+  .mobile-hide {
+    display: none;
+  }
+}
+
 .invisible {
   display: none;
 }
 
-.block {
-  display: inline-block;
+#question-action-buttons {
+  margin-top: $large;
+  margin-bottom: $large;
+
+  input {
+    display: inline-block;
+    margin-bottom: 0.5rem; // Same as horizontal spacing
+  }
+
+  form {
+    display: inline-block;
+    margin-bottom: 0;
+  }
 }

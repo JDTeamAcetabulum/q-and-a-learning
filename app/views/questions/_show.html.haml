@@ -5,20 +5,20 @@
 %p
   %b Created by:
   = get_user(@question.user_id).username
-  %h2 Question:
-  %p
+  %h2
     = @question.content
-  %h2 Answers:
   = form_tag submit_question_url do
     = hidden_field_tag 'question', @question.id
+    
     - @question.answers.each do |a|
       - if a.content == "your answer"
         = label_tag a.content
         = text_field_tag :answer
       - elsif a.content == "."
       - else
-        = label_tag a.content
-        = radio_button_tag :answer, a.id, a == @answer, required: true, disabled: @answered || is_instructor?
+        %label
+          = radio_button_tag :answer, a.id, a == @answer, required: true, disabled: @answered || is_instructor?
+          = a.content
 
     %br
     - if not @answered and not is_instructor?

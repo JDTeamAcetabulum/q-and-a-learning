@@ -1,3 +1,13 @@
-%h1 Welcome to the CS 1332
-%h2
-  This is some description text
+%h1 Welcome
+
+%p
+  Welcome to the QNA application, for CS 1332!
+  This web app allows students to answers questions created by instructors.
+  You may find the following navbar pages useful.
+
+%ul
+  = bold_list_item('Home', 'this page')
+  = bold_list_item('Questions', 'view and answer questions')
+  = bold_list_item('Statistics', 'view class statistics')
+  - if is_instructor?
+    = bold_list_item('Roster', 'view students and student statistics')

@@ -153,7 +153,7 @@ class QuestionsController < ApplicationController
     end
 
     Topic.where(id: topic_ids).each do |t|
-      t.question.each do |q|
+      t.questions.each do |q|
         question_ids << q.id
       end
     end
