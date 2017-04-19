@@ -122,3 +122,12 @@ nav {
 .block {
   display: inline-block;
 }
+
+.nomargin {
+  margin-top: $large;
+  margin-bottom: $large;
+
+  input, form {
+    margin-bottom: 0.1rem;
+  }
+}
