@@ -22,7 +22,8 @@
   %svg#graph
 
 %div.block
-  %button#show-results Show Results
+  - if is_instructor? or @answered
+    %button#show-results Show Results
   - if is_instructor?
     %button
       = link_to 'Make Live', show_live_question(:id => @question.id)
