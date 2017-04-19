@@ -39,7 +39,7 @@ $('body.statistics.index').ready(() => {
     xScale.domain(data.map(d => d.label));
     yScale.domain([0, d3.max(layers[layers.length - 1], d => d[0] + d[1])]).nice();
 
-    let layer = svg.selectAll('.layer')
+    const layer = svg.selectAll('.layer')
       .data(layers)
       .enter().append('g')
       .attr('class', 'layer')
@@ -98,32 +98,6 @@ $('body.statistics.index').ready(() => {
         .attr('x', width)
         .attr('y', height - 6)
         .text('Questions');
-
-    const views = ['Questions', 'Users'];
-
-    function changeData() {
-      console.log(d3.select('select').property('value'));
-      const x1 = d3.scaleBand()
-          .padding(0.05);
-      x1.domain(['a', 'b', 'c', 'd']).rangeRound([0, xScale.bandwidth()]);
-      layer = svg.selectAll('.layer')
-        .data(data);
-      layer.selectAll('rect')
-        .data((d) => { console.log(d); return d; })
-        .attr('x', (d) => { console.log(d); return x1(d.key); })
-        .attr('width', d => x1.bandwidth());
-    }
-
-    const select = d3.select('#metachart')
-        .append('select')
-        .attr('class', 'select')
-        .on('change', changeData);
-
-    const options = select
-        .selectAll('option')
-        .data(views).enter()
-        .append('option')
-        .text(d => d);
   }
 
   function showStats() {
