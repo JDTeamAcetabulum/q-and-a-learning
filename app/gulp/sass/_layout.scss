@@ -132,12 +132,13 @@ nav {
   margin-top: $large;
   margin-bottom: $large;
 
-  a {
-    color: darkslategrey;
+  input {
+    display: inline-block;
+    margin-bottom: 0.5rem; // Same as horizontal spacing
   }
 
-  button {
+  form {
     display: inline-block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 }
