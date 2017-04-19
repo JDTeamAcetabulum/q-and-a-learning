@@ -15,4 +15,9 @@ module ApplicationHelper
     "<li><strong>#{bolded}</strong> &mdash; #{description}</li>".html_safe
   end
 
+  # Truncate text and end it with '...' if the length is greater than cutoff
+  def truncate(text, cutoff = 50)
+    text.length > cutoff ? "#{text[0..(cutoff - 3)]}..." : text
+  end
+
 end
