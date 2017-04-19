@@ -17,7 +17,7 @@
           %td= get_user(question.user_id).username
           %td= question.all_lectures
           %td= question.all_topics
-          %td= question.content
+          %td= truncate(question.content)
           %td= question.published
           %td
             = link_to 'Show', question

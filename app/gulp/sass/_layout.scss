@@ -4,7 +4,10 @@
 
 $content-margin: $small;
 $sidebar-width: 22rem;
+$sidebar-width-mobile: 5rem;
 $top-bar-height: 5rem;
+
+$mobile-width: 667px;
 
 * {
   box-sizing: border-box; // Padding and margin subtract from width
@@ -98,6 +101,18 @@ nav {
 
   height: 100%;
   width: auto;
+}
+
+@media only screen and (max-width: $mobile-width) {
+  nav {
+    width: $sidebar-width-mobile;
+  }
+  #content {
+    margin-left: $sidebar-width-mobile + $content-margin * 2;
+  }
+  .mobile-hide {
+    display: none;
+  }
 }
 
 .invisible {
