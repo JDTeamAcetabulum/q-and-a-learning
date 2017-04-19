@@ -128,19 +128,16 @@ nav {
   display: none;
 }
 
-.block {
-  display: inline-block;
+#question-action-buttons {
+  margin-top: $large;
+  margin-bottom: $large;
 
   a {
     color: darkslategrey;
   }
-}
 
-.nomargin {
-  margin-top: $large;
-  margin-bottom: $large;
-
-  input, form {
-    margin-bottom: 0.1rem;
+  button {
+    display: inline-block;
+    margin-bottom: 0.5rem;
   }
 }
