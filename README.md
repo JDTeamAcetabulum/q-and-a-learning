@@ -1,22 +1,29 @@
 # qna [![CircleCI](https://circleci.com/gh/JDTeamAcetabulum/qna.svg?style=shield)](https://circleci.com/gh/JDTeamAcetabulum/qna) [![Coverage Status](https://coveralls.io/repos/github/JDTeamAcetabulum/qna/badge.svg)](https://coveralls.io/github/JDTeamAcetabulum/qna) [![Zenhub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
 
-This application is meant to serve as an alternative to the Turing Point Clicker
-system used at the Georgia Institute of Technology.
+Welcome to the QNA project! This is a web application that enables instructors to ask students questions, either in class (via "live questions") or out of class. It was originally developed an alternative to the Turing Point Clicker system used at the Georgia Institute of Technology.
 
-# Getting Started
+## Getting Started
 
-You will need:
- * Ruby version `2.2.2`
- * Rails version `5.0.1`
- * Postgresql version `9.5.6`
- * npm
+It is possible to run the app by running it locally, or by deploying it to [Heroku](heroku.com). The following instructions are for running the app locally.
 
-To install, first clone to repo locally. Run `bundle install` to install all
-the necessary dependencies (listed in `Gemfile`). Also run `npm install` to
-install the necessary `npm` dependencies.
+### Dependencies
 
-When the above is completed, you simply need to migrate the database and run
-the app. Migrate the database by running `rails db:setup && rails db:migrate`.
-Then simply run the app using `rails s`.
+You will need to install the following dependencies. Please refer to the installation instructions for each. This application has been tested with the version numbers indicated, though later versions may also work.
 
-To run the test suite: `rails test`
+* [Ruby](https://www.ruby-lang.org) version `2.2.2` with [Rails](http://rubyonrails.org/) version `5.0.1` and [bundler](http://bundler.io/) version `1.14.4`
+* [Postgresql](https://www.postgresql.org/) version `9.5.6`
+* [node.js](https://nodejs.org) version `7.9.0` and npm (included)
+
+### Installation
+
+To install the app itself, download the latest release from [Github releases](https://github.com/JDTeamAcetabulum/qna/releases) or [clone this repository](https://help.github.com/articles/cloning-a-repository/) for the current development version and complete the following steps.
+
+1. Run `bundle install` to install the dependencies for Ruby/Rails (listed in `Gemfile`).
+1. Run `npm install` to install the necessary dependencies for node.js.
+1. Run `rails db:setup && rails db:migrate` to set up the database and run migrations.
+
+### Running
+
+Run the web server with `rails server`. The server will automatically use the port indicated by the `PORT` environment variable, or port 3000 if no port is set.
+
+Run the test suite with `rails test`.
