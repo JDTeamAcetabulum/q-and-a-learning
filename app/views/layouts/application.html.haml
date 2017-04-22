@@ -52,4 +52,8 @@
       - if check_privilege(controller_name, action_name)
         = yield
       - else
-        = controller.redirect_to action: 'login', controller: 'login'
+        - flash[:error] = 'You don\'t have permission to access that page'
+        - if logged_in?
+          = controller.redirect_to controller: 'home', action: 'home'
+        - else
+          = controller.redirect_to controller: 'login', action: 'login'

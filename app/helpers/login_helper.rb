@@ -29,9 +29,14 @@ module LoginHelper
 
   def check_privilege(controller, action)
     if logged_in?
-      if @current_user[:role] != "instructor"
-        restricted = {"users" => ["index"], "questions" => ["new", "edit", "short"]}
-        not restricted[controller] && restricted[controller].include?(action)
+      if @current_user[:role] == "student"
+        whitelist = {
+          "home" => ["home"],
+          "questions" => ["index", "show"],
+          "statistics" => ["index"],
+          "users" => ["show"],
+        }
+        whitelist[controller] && whitelist[controller].include?(action)
       else
         true
       end
