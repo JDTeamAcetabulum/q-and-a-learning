@@ -1,4 +1,8 @@
+- flash.each do |_, value|
+  .error= value
+
 - provide(:title, 'Register')
+
 %h1 Register
 .row
   = form_for(@user, url: register_path) do |f|

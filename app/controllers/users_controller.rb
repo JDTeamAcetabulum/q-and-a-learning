@@ -23,6 +23,9 @@ class UsersController < ApplicationController
       view_context.log_in @user
       redirect_to home_path
     else
+      if @user.password.length < 6
+        flash[:error] = "Password must be at least 6 characters"
+      end
       render 'new'
     end
   end
