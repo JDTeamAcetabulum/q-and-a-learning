@@ -36,6 +36,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def import
+    User.import(params[:file])
+  end
+
   private
 
     def user_params

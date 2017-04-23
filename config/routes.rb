@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   get '/check_live_question', to: 'questions#check_live_question', :as => :check_live_question
   get '/get_popup_html', to: 'questions#get_popup_html'
 
-  resources :users
+  resources :users do
+    collection {post :import}
+  end
   resources :questions do
     collection do
       get 'export'
