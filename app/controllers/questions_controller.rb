@@ -85,7 +85,7 @@ class QuestionsController < ApplicationController
     respond_to do |format|
       if @question.save
         @question.published_at = Time.current if publishing?
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to @question, :flash => { :success => 'Question successfully created' } }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -102,7 +102,7 @@ class QuestionsController < ApplicationController
       if @question.update(question_params)
         @question.correct_answer.update(question_params[:correct_answer_attributes])
         update_answers
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to @question, :flash => { :success => 'Question successfully updated' } }
         format.json { render :show, status: :ok, location: @question }
       else
         format.html { render :edit }
@@ -116,7 +116,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to questions_url, :flash => { :success => 'Question successfully destroyed' } }
       format.json { head :no_content }
     end
   end
@@ -125,7 +125,7 @@ class QuestionsController < ApplicationController
   def submit_question
     current_user.answers << Answer.find_by_id(params[:answer])
     respond_to do |format|
-        format.html { redirect_to questions_url, notice: 'Questions successfully answered.' }
+        format.html { redirect_to questions_url, :flash => { :success => 'Question successfully answered' } }
     end
   end
 
@@ -169,9 +169,9 @@ class QuestionsController < ApplicationController
   def import_csv
     begin
       Question.import(params[:file], current_user)
-      redirect_to questions_path, notice: 'Upload successful'
+      redirect_to questions_path, :flash => { :success => 'Upload successful' }
     rescue
-      redirect_to questions_path, notice: 'Upload failed (bad CSV)'
+      redirect_to questions_path, error: 'Upload failed (bad CSV)'
     end
   end
 
