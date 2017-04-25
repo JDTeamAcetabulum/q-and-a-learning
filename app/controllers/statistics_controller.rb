@@ -1,6 +1,6 @@
 class StatisticsController < ApplicationController
   def index
-    @users = User.all
+    @users = User.all.order(:username)
     @questions = Question.all
     @results = Answer.joins(:users)
     @userStats ||= []

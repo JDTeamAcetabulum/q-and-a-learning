@@ -1,29 +1,35 @@
 - provide(:title, @user.username)
 
-%h1= "#{@user.role.capitalize}: #{@user.username}"
-#user-role{ data: { role: @user.role } }
+- if current_user.role == 'student' && @current_user.id.to_s != params[:id]
+  -# Students aren't allowed to access profiles of other students
+  - flash[:error] = 'You don\'t have permission to access that page'
+  = controller.redirect_to controller: 'home', action: 'home'
 
-- if not @user.is_instructor?
-  #student-data{ data: { numcorrect: @num_correct, numincorrect: @num_incorrect } }
+- else
+  %h1= "#{@user.role.capitalize}: #{@user.username}"
+  #user-role{ data: { role: @user.role } }
 
-  - if @answers.nil? || @answers.empty?
-    %p This student hasn't answered any questions.
+  - if not @user.is_instructor?
+    #student-data{ data: { numcorrect: @num_correct, numincorrect: @num_incorrect } }
 
-  - else
-    %h2 Summary
-    #num-correct-chart
+    - if @answers.nil? || @answers.empty?
+      %p This student hasn't answered any questions.
 
-    %h2 Previous answers
-    %table#student-answers-table
-      %thead
-        %tr
-          %th Question
-          %th Answer
-          %th Correct?
+    - else
+      %h2 Summary
+      #num-correct-chart
 
-      %tbody
-        - @answers.zip(@questions).each do |answer, question|
+      %h2 Previous answers
+      %table#student-answers-table
+        %thead
           %tr
-            %td= link_to question.content, question
-            %td= answer.content
-            %td= answer.correct
+            %th Question
+            %th Answer
+            %th Correct?
+
+        %tbody
+          - @answers.zip(@questions).each do |answer, question|
+            %tr
+              %td= link_to question.content, question
+              %td= answer.content
+              %td= answer.correct

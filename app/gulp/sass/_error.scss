@@ -4,6 +4,9 @@
 
 $error-width: 45rem;
 
+$flash-error-color: #db1e1e;
+$flash-success-color: #1edb1e;
+
 pre {
   background-color: #eee;
   padding: $small;
@@ -14,8 +17,19 @@ div.actions {
   margin-bottom: 1rem;
 }
 
-#notice {
-  color: green;
+#flash-box { // Flash/notice styles
+  background-color: $ui-gray-light;
+  border: 1px solid $ui-gray-dark;
+  padding-top: $smaller;
+  padding-bottom: $smaller;
+  text-align: center;
+
+  .flash-error {
+    color: $flash-error-color;
+  }
+  .flash-success {
+    color: $flash-success-color;
+  }
 }
 
 .field_with_errors {

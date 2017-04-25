@@ -106,7 +106,7 @@ nav {
   margin-top: $top-bar-height + $content-margin;
   margin-bottom: $content-margin;
   margin-left: $sidebar-width + $content-margin * 2;
-  margin-right: $content-margin;
+  margin-right: $content-margin * 2;
 
   height: 100%;
   width: auto;

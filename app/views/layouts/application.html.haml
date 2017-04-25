@@ -48,8 +48,18 @@
                 %span.mobile-hide Roster
         %hr
     #content.container
-      #modal-window.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+      - if logged_in?
+        #modal-window.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+      - if !flash.empty?
+        #flash-box
+          - flash.each do |key, message|
+            %div{:class => "flash-#{key}"}= message
+
       - if check_privilege(controller_name, action_name)
         = yield
       - else
-        = controller.redirect_to action: 'login', controller: 'login'
+        - flash[:error] = 'You don\'t have permission to access that page'
+        - if logged_in?
+          = controller.redirect_to controller: 'home', action: 'home'
+        - else
+          = controller.redirect_to controller: 'login', action: 'login'
