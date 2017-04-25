@@ -27,3 +27,7 @@ To install the app itself, download the latest release from [Github releases](ht
 Run the web server with `rails server`. The server will automatically use the port indicated by the `PORT` environment variable, or port 3000 if no port is set.
 
 Run the test suite with `rails test`.
+
+### Troubleshooting
+
+If the application encounters an error in production, a detailed application trace will be found in `log/` with a timestamp. If an error is encountered locally, the server will serve a page with a detailed application trace which mirrors the one found in the terminal running `rails s`. It is reccommended to use a `debugger` statement anywhere in the code to debug. Rails will pause execution at the `debugger` statement and give a CLI to run debugging statements in the terminal running `rails s`. More information about the debugger can be found [here](http://guides.rubyonrails.org/debugging_rails_applications.html).
