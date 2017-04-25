@@ -23,7 +23,14 @@ class UsersController < ApplicationController
       view_context.log_in @user
       redirect_to home_path
     else
-      render 'new'
+      if @user.password.length < 6
+        flash[:error] = "Password must be at least 6 characters"
+      elsif !User.where(username: @user.username).empty?
+        flash[:error] = "Username \"#{@user.username}\" already taken"
+      else
+        flash[:error] = "Couldn't create user"
+      end
+      redirect_to register_path
     end
   end
 
