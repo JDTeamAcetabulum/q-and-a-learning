@@ -1,5 +1,7 @@
-// Some simple styles that only go on the login page
+// Some simple styles that only go on the login/register pages
 
-#login-login #content {
-  width: 20rem;
+#login-login, #users-new {
+  input {
+    max-width: 25rem;
+  }
 }
